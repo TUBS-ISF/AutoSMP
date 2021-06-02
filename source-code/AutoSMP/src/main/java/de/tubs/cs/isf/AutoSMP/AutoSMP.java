@@ -42,14 +42,20 @@ public class AutoSMP {
 			return;
 		}
 
-		final AutoSMP evaluator = new AutoSMP(args[0]);
-		if (evaluator.parseParameter(args)) {
-			evaluator.init();
-			evaluator.run();
-			evaluator.dispose();
-		} else {
-			Logger.getInstance().logInfo("Stopping framework. Reason: see [Error] above!", 0, false);
+		if (args.length < 2) {
+			Logger.getInstance().logInfo("Configuration path or name not specified!" + "Your input was: " + args[0], 0,
+					false);
+			return;
 		}
+
+		final AutoSMP evaluator = new AutoSMP(args[0], args[1]);
+//		if (evaluator.parseParameter(args)) {
+//			evaluator.init();
+//			evaluator.run();
+//			evaluator.dispose();
+//		} else {
+//			Logger.getInstance().logInfo("Stopping framework. Reason: see [Error] above!", 0, false);
+//		}
 	}
 
 	public static String toString(List<String> sample) {
@@ -105,15 +111,34 @@ public class AutoSMP {
 	 * Contains all systems feature models to be used for the stability calculation
 	 */
 	public IFeatureModel[] systems = null;
+
 	/**
-	 * Creates a new {@link AutoSMP} that automatically read the
-	 * configuration, set up every path, and do more things.
+	 * Creates a new {@link AutoSMP} that automatically read the configuration, set
+	 * up every path, and do more things.
 	 * 
 	 * @param configName Name of the configuration to load.
 	 * @throws Exception
 	 */
 	public AutoSMP(String configName) throws Exception {
 		config = new SamplingConfig(configName);
+
+		// Create modules
+		module_ParameterParser = new ParameterParserModule(this);
+		module_AlgorithmLoader = new AlgorithmLoaderModule(this);
+		module_StabilityCalculator = new StabilityCalculatorModule(this);
+		module_Writer = new WriterModule(this);
+	}
+
+	/**
+	 * Creates a new {@link AutoSMP} that automatically read the configuration, set
+	 * up every path, and do more things.
+	 * 
+	 * @param configPath Path of the configuration folder
+	 * @param configName Name of the configuration to load.
+	 * @throws Exception
+	 */
+	public AutoSMP(String configPath, String configName) throws Exception {
+		config = new SamplingConfig(configPath, configName);
 
 		// Create modules
 		module_ParameterParser = new ParameterParserModule(this);

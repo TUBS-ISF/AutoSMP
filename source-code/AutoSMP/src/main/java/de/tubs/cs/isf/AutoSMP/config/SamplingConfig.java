@@ -46,6 +46,7 @@ import de.tubs.cs.isf.AutoSMP.logger.Logger;
  */
 public class SamplingConfig {
 
+//########## Definition of Default Values
 	/**
 	 * The default file extension for a SamplingConfig.
 	 */
@@ -82,9 +83,11 @@ public class SamplingConfig {
 	 */
 	private static final String DEFAULT_SAMPLES_DIRECTORY = "samples";
 
+//########## Property definition
 	/** Contains all properties after reading the configuration file. */
 	protected static final List<IProperty> propertyList = new LinkedList<>();
 
+	//###### Define puplic static methods to work with the propertyList
 	/**
 	 * Adds a property to the complete list of all properties.
 	 * 
@@ -93,7 +96,6 @@ public class SamplingConfig {
 	public static void addProperty(IProperty property) {
 		propertyList.add(property);
 	}
-
 	/**
 	 * @return A list with all properties.
 	 */
@@ -101,82 +103,82 @@ public class SamplingConfig {
 		return propertyList;
 	}
 
-	/** {@link IntProperty} indicates the verbosity of output information. */
+	//########## Define Properties runtime properties
+	/** {@link IntProperty} indicates indicates how often an algorithm will be executed. */
 	public final IntProperty algorithmIterations = new IntProperty("algorithmIterations", 1);
-	/** Path to the folder containing sampling algorithm implementations files. */
-	public Path algorithmPath;
-
 	/**
-	 * {@link BoolProperty} indicates whether computed samples should be saved or
-	 * not.
+	 * {@link StringProperty} indicates which algorithms should be considered during the evaluation.
 	 */
 	public final StringListProperty algorithms = new StringListProperty("algorithms");
 	/** {@link StringProperty} indicates the author of the current benchmark. */
 	public final StringProperty author = new StringProperty("author");
 	/**
-	 * {@link BoolProperty} indicates whether computed samples should be saved or
+	 * {@link BoolProperty} indicates whether sampling stability should be considered or
 	 * not.
 	 */
 	public final StringProperty calculateStability = new StringProperty("calculateStability", "");
-	/** Path to the folder containing configuration files. */
-	public Path configPath;
-
-	/** Path to the folder containing <code>.csv</code> files. */
-	public Path csvPath;
 	/**
 	 * {@link BoolProperty} indicates whether temporary files should be deleted or
 	 * not.
 	 */
 	public final BoolProperty debug = new BoolProperty("debug", false);
-	/** Path to the folder containing model files. */
-	public Path inputPath;
-	/** Path to the folder containing log files. */
-	public Path logPath;
 	/** {@link StringProperty} indicates the author of the current benchmark. */
 	public final StringProperty maximumMemoryAllocation = new StringProperty("maxAlloc", "Xmx4g");
-
 	/** {@link StringProperty} indicates the author of the current benchmark. */
 	public final StringProperty minimumMemoryAllocation = new StringProperty("minAlloc", "Xms2g");
-	/** Path to the folder containing output files.. */
-	public Path outputPath;
 	/** {@link Seed} determines the seed for each randomized operation. */
 	public final LongProperty randomSeed = new LongProperty("seed", System.currentTimeMillis());
-	/** Path to the folder containing the computed sample files. */
-	public Path samplesPath;
 	/**
 	 * {@link BoolProperty} indicates whether computed samples should be saved or
 	 * not.
 	 */
 	public final BoolProperty storeSamples = new BoolProperty("storeSamples", false);
 	/**
-	 * List containing the IDS of all systems that should be used in the current
-	 * benchmark.
-	 */
-	public List<Integer> systemIDs;
-	/**
 	 * {@link IntProperty} indicates how often a certain system is repeated in the
 	 * benchmark.
 	 */
 	public final IntProperty systemIterations = new IntProperty("systemIterations", 1);
 	/**
-	 * List containing the names of all systems that should be used in the current
-	 * benchmark.
-	 */
-	public List<String> systemNames = new ArrayList<>();
-	/**
 	 * {@link IntProperty} indicates the degree of t-wise coverage that should be
 	 * achieved.
 	 */
 	public final IntProperty tCoverage = new IntProperty("t");
-	/** Path to the folder containing temporary files. */
-	public Path tempPath;
-
 	/** {@link Timeout} determines the timeout for each algorithm iteration. */
 	public final LongProperty timeout = new LongProperty("timeout", Long.MAX_VALUE);
-
 	/** {@link IntProperty} indicates the verbosity of output information. */
 	public final IntProperty verbosity = new IntProperty("verbosity", 0);
 
+	//########## Define Path properties
+	/** Path to the folder containing sampling algorithm implementations files. */
+	public Path algorithmPath;
+	/** Path to the folder containing configuration files. */
+	public Path configPath;
+	/** Path to the folder containing <code>.csv</code> files. */
+	public Path csvPath;
+	/** Path to the folder containing model files. */
+	public Path inputPath;
+	/** Path to the folder containing log files. */
+	public Path logPath;
+	/** Path to the folder containing output files.. */
+	public Path outputPath;
+	/** Path to the folder containing the computed sample files. */
+	public Path samplesPath;
+	/** Path to the folder containing temporary files. */
+	public Path tempPath;
+	
+//############ Definition of utility fields
+	/**
+	 * List containing the IDS of all systems that should be used in the current
+	 * benchmark.
+	 */
+	public List<Integer> systemIDs;
+	/**
+	 * List containing the names of all systems that should be used in the current
+	 * benchmark.
+	 */
+	public List<String> systemNames = new ArrayList<>();
+
+//############# Constructor Defintion
 	/**
 	 * Creates a {@link SamplingConfig} at the
 	 * {@link SamplingConfig#DEFAULT_CONFIG_DIRECTORY} and reads the default
@@ -200,7 +202,21 @@ public class SamplingConfig {
 		this.configPath = Paths.get(DEFAULT_CONFIG_DIRECTORY);
 		readConfig(configName);
 	}
-
+	
+	/**
+	 * Creates a {@link SamplingConfig} at the
+	 * <code> configPath </code> and reads the configuration
+	 * with the given <code>configName</code>.
+	 * 
+	 * @param configPath File path of the configuration folder.
+	 * @param configName File name of the configuration.
+	 */
+	public SamplingConfig(String configPath, String configName) {
+		this.configPath = Paths.get(configPath);
+		readConfig(configName);
+	}
+	
+//########## Declaration of Methods 
 	/**
 	 * Return the file name for a given path if the {@link Path} points to a
 	 * {@link Files}.
@@ -257,6 +273,7 @@ public class SamplingConfig {
 		try {
 			properties.load(Files.newInputStream(path));
 			for (IProperty prop : propertyList) {
+				Logger.getInstance().logInfo("Property contained in prop list: " + prop.getKey(), false);
 				String value = properties.getProperty(prop.getKey());
 				if (value != null) {
 					prop.setValue(value);
