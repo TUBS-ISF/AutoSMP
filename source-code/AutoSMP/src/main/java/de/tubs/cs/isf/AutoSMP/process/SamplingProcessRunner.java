@@ -1,9 +1,13 @@
 package de.tubs.cs.isf.AutoSMP.process;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Stream;
 
 import de.tubs.cs.isf.AutoSMP.algorithms.ASamplingAlgorithm;
 import de.tubs.cs.isf.AutoSMP.logger.ErrStreamCollector;
@@ -38,17 +42,62 @@ public class SamplingProcessRunner {
 	 */
 	public SamplingResults run(ASamplingAlgorithm algorithm) {
 		SamplingResults result = new SamplingResults();
+		Logger.getInstance().logInfo("Running External Process", false);
+//		List<String> command = new ArrayList<String>();
+//		command.add("powershell.exe");
+//		command.add("java");
+//		command.add("-jar");
+//		command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
+//		ProcessBuilder pb = new ProcessBuilder(command);
+////		pb.command("powershell.exe", "/c", "ping -n 3 google.com");
+////		pb.command("bash.exe", "/c", "java -jar A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
+////		pb.command("git-bash.exe", "echo 'hello bash'");
+////		pb.command("powershell.exe", "java --version","echo 'hello powershell'");
+//		try {
+//			Logger.getInstance().logInfo("OS Name: " + System.getProperty("os.name"), false);
+//			Process process = pb.start();
+//			// blocked :(
+//			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+//			String line;
+//			while ((line = reader.readLine()) != null) {
+//				Logger.getInstance().logInfo(line, false);
+//			}
+//			int exitCode = process.waitFor();
+//			System.out.println("\nExited with error code : " + exitCode);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		}
+
 		boolean terminatedInTime = false;
 		long startTime = 0, endTime = 0;
 		try {
 			System.gc();
 			algorithm.preProcess();
 
-			Logger.getInstance().logInfo(algorithm.getCommand(), 1, true);
+			Logger.getInstance().logInfo(algorithm.getCommand(), 1, false);
 
-			final List<String> command = algorithm.getCommandElements();
+			final List<String> command = new ArrayList<>(); 
+			if(System.getProperty("os.name").contains("Windows 10")) {
+				Logger.getInstance().logInfo("OS Name: " + System.getProperty("os.name"), false);
+				command.add("powershell.exe");
+			}
+			command.addAll(algorithm.getCommandElements());
+//			command.add("java");
+//			command.add("-da");
+//			command.add("-Xmx4g");
+//			command.add("-Xms2g");
+//			command.add("-cp");
+//			command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/*");
+//			command.add("-jar");
+//			command.add("saob.jar");
+//			command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
+
 			if (!command.isEmpty()) {
+				Logger.getInstance().logInfo(command.toString(), false);
 				final ProcessBuilder processBuilder = new ProcessBuilder(command);
+				Logger.getInstance().logInfo(processBuilder.command().toString(), false);
 				Process process = null;
 
 				final ErrStreamCollector errStreamCollector = new ErrStreamCollector();
@@ -61,14 +110,19 @@ public class SamplingProcessRunner {
 				try {
 					startTime = System.nanoTime();
 					process = processBuilder.start();
-
 					outRedirector.setInputStream(process.getInputStream());
 					errRedirector.setInputStream(process.getErrorStream());
 					outThread.start();
 					errThread.start();
 
+					BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+					String line;
+					while((line = reader.readLine()) != null) {
+						Logger.getInstance().logInfo(line, false);
+					}
 					terminatedInTime = process.waitFor(timeout, TimeUnit.MILLISECONDS);
 					endTime = System.nanoTime();
+					
 					result.setTerminatedInTime(terminatedInTime);
 					result.setNoErrorOccured(errStreamCollector.getErrList().isEmpty());
 					result.setRuntime((endTime - startTime) / 1_000_000L);

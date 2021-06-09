@@ -19,6 +19,9 @@ public class ParameterParserModule {
 
 	private static final String PARAMETER_OUTPUTSYSTEM_PATH = "-out";
 	private static final String PARAMETER_STORE_MODE_PATH = "-store";
+	
+	private static final String PARAMETER_SAMPLING = "-sampling"; 
+	private static final String PARAMETER_REQUEST = "-request";
 
 	private final SamplingConfig config;
 	private final AutoSMP sampler;
@@ -58,6 +61,7 @@ public class ParameterParserModule {
 
 		// 1) (-alg) Algorithm (expects a class name extending the ATWiseSampling class)
 		if (arguments.contains(PARAMETER_ALGORITHM)) {
+			Logger.getInstance().logInfo("reading algos -alg...", false);
 			int index = arguments.indexOf(PARAMETER_ALGORITHM);
 			if ((index + 1) < arguments.size()) {
 				String algorithmName = arguments.get(index + 1);
@@ -78,6 +82,7 @@ public class ParameterParserModule {
 
 		// 2) (-t) t_wise coverage
 		if (arguments.contains(PARAMETER_COVERAGE)) {
+			Logger.getInstance().logInfo("reading coverage -t...", false);
 			int index = arguments.indexOf(PARAMETER_COVERAGE);
 			if ((index + 1) < arguments.size()) {
 				String value = arguments.get(index + 1);
@@ -104,6 +109,7 @@ public class ParameterParserModule {
 
 		// 3) Specify systems path
 		if (arguments.contains(PARAMETER_INPUTSYSTEM_PATH)) {
+			Logger.getInstance().logInfo("reading system specifics -in...", false);
 			int index = arguments.indexOf(PARAMETER_INPUTSYSTEM_PATH);
 			if ((index + 1) < arguments.size()) {
 				String absolutePathToSystems = arguments.get(index + 1);
@@ -144,6 +150,7 @@ public class ParameterParserModule {
 
 		// 4) Specify output path
 		if (arguments.contains(PARAMETER_OUTPUTSYSTEM_PATH)) {
+			Logger.getInstance().logInfo("reading ouput Paths -out...", false);
 			int index = arguments.indexOf(PARAMETER_OUTPUTSYSTEM_PATH);
 			if ((index + 1) < arguments.size()) {
 				String absolutePathToOutput = arguments.get(index + 1);
@@ -177,8 +184,32 @@ public class ParameterParserModule {
 
 		// 5) Identify store mode
 		if (arguments.contains(PARAMETER_STORE_MODE_PATH)) {
+			Logger.getInstance().logInfo("reading store method -store...", false);
 			config.storeSamples.setValue("true");
 			Logger.getInstance().logInfo("[-store] = true", false);
+		}
+		
+		// 6) Defintion of request path
+		if(arguments.contains(PARAMETER_REQUEST)) {
+			Logger.getInstance().logInfo("Reading Request path.", false);
+			int index = arguments.lastIndexOf(PARAMETER_REQUEST);
+			if(arguments.size() >= index+1) {
+				Logger.getInstance().logInfo(arguments.get(index+1), false);
+				Path requestPath = Paths.get(arguments.get(index+1));
+				config.requestPath = requestPath;
+				config.doCustomRecommendation = true;
+			}
+			else {
+				Logger.getInstance().logError("your defintion of the config path is of.");
+			}
+			
+		}
+		// 7) Defintion whether sampling will be executed
+		if(arguments.contains(PARAMETER_REQUEST) && !(arguments.contains(PARAMETER_SAMPLING))) {
+			config.doSampling = false; 
+		}
+		else {
+			config.doSampling = true;
 		}
 		Logger.getInstance().logInfo(" ", 0, false);
 		return true;

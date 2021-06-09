@@ -99,19 +99,20 @@ public abstract class AJavaMemoryTWiseSamplingAlgorithm extends ASamplingAlgorit
 
 	@Override
 	public final void preProcess() throws Exception {
+		System.out.println("Start preprocessing algorithm");
 		commandElements.clear();
 		addCommandElement("java");
 		addCommandElement("-da");
 		addCommandElement("-" + this.maximumMemoryAllocation);
 		addCommandElement("-" + this.minimumMemoryAllocation);
 
-		String version = Runtime.class.getPackage().getSpecificationVersion();
-		if (version.startsWith("11")) {
-			addCommandElement("-Xlog:gc:" + getPathOfGarbageCollectorFile());
-		} else {
-			addCommandElement("-Xloggc:" + getPathOfGarbageCollectorFile());
-			addCommandElement("-XX:+PrintGCDateStamps");
-		}
+//		String version = Runtime.class.getPackage().getSpecificationVersion();
+//		if (version.startsWith("11")) {
+//			addCommandElement("-Xlog:gc:" + getPathOfGarbageCollectorFile());
+//		} else {
+//			addCommandElement("-Xloggc:" + getPathOfGarbageCollectorFile());
+//			addCommandElement("-XX:+PrintGCDateStamps");
+//		}
 		addCommandElements();
 	}
 }

@@ -34,6 +34,7 @@ import de.tubs.cs.isf.AutoSMP.config.properties.BoolProperty;
 import de.tubs.cs.isf.AutoSMP.config.properties.IProperty;
 import de.tubs.cs.isf.AutoSMP.config.properties.IntProperty;
 import de.tubs.cs.isf.AutoSMP.config.properties.LongProperty;
+import de.tubs.cs.isf.AutoSMP.config.properties.PathProperty;
 import de.tubs.cs.isf.AutoSMP.config.properties.StringListProperty;
 import de.tubs.cs.isf.AutoSMP.config.properties.StringProperty;
 import de.tubs.cs.isf.AutoSMP.logger.Logger;
@@ -82,12 +83,26 @@ public class SamplingConfig {
 	 * The default path for the samples directory relative to the output path.
 	 */
 	private static final String DEFAULT_SAMPLES_DIRECTORY = "samples";
+	/**
+	 * The default path for the csv directory relative to the output path.
+	 */
+	private static final String DEFAULT_CSV_DIRECTORY = "csv";
+	/**
+	 * The default path for the log directory relative to the output path.
+	 */
+	private static final String DEFAULT_LOG_DIRECTORY = "log";
+	/**
+	 * The default path for the temp directory relative to the output path.
+	 */
+	private static final String DEFAULT_TEMP_DIR = "temp";
+	
+	private static final String DEFAULT_REQUEST_PATH = "./request.req"; 
 
 //########## Property definition
 	/** Contains all properties after reading the configuration file. */
 	protected static final List<IProperty> propertyList = new LinkedList<>();
 
-	//###### Define puplic static methods to work with the propertyList
+	// ###### Define puplic static methods to work with the propertyList
 	/**
 	 * Adds a property to the complete list of all properties.
 	 * 
@@ -96,6 +111,7 @@ public class SamplingConfig {
 	public static void addProperty(IProperty property) {
 		propertyList.add(property);
 	}
+
 	/**
 	 * @return A list with all properties.
 	 */
@@ -103,18 +119,19 @@ public class SamplingConfig {
 		return propertyList;
 	}
 
-	//########## Define Properties runtime properties
-	/** {@link IntProperty} indicates indicates how often an algorithm will be executed. */
+	// ########## Define Properties runtime properties
+	/** {@link IntProperty} indicates how often an algorithm will be executed. */
 	public final IntProperty algorithmIterations = new IntProperty("algorithmIterations", 1);
 	/**
-	 * {@link StringProperty} indicates which algorithms should be considered during the evaluation.
+	 * {@link StringProperty} indicates which algorithms should be considered during
+	 * the evaluation.
 	 */
 	public final StringListProperty algorithms = new StringListProperty("algorithms");
 	/** {@link StringProperty} indicates the author of the current benchmark. */
 	public final StringProperty author = new StringProperty("author");
 	/**
-	 * {@link BoolProperty} indicates whether sampling stability should be considered or
-	 * not.
+	 * {@link BoolProperty} indicates whether sampling stability should be
+	 * considered or not.
 	 */
 	public final StringProperty calculateStability = new StringProperty("calculateStability", "");
 	/**
@@ -148,7 +165,50 @@ public class SamplingConfig {
 	/** {@link IntProperty} indicates the verbosity of output information. */
 	public final IntProperty verbosity = new IntProperty("verbosity", 0);
 
-	//########## Define Path properties
+	// ########## Define Path properties
+	/**
+	 * {@PathProperty} that defines the directory of the algorithms that will be
+	 * used in the evaluation
+	 */
+	public final PathProperty algorithmDirectory = new PathProperty("algoDir", DEFAULT_ALGORITHMS_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory of the configuration file that
+	 * will be used to set up the evaluation
+	 */
+	public final PathProperty configDirectory = new PathProperty("configDir", DEFAULT_CONFIG_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory of the csv folder
+	 */
+	public final PathProperty csvDirectory = new PathProperty("csvDir", DEFAULT_CSV_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory of the benchmarks that will be
+	 * used in the evaluation
+	 */
+	public final PathProperty inputDirectory = new PathProperty("inputDir", DEFAULT_INPUT_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory where the output of the evaluation
+	 * is stored
+	 */
+	public final PathProperty outputDirectory = new PathProperty("outputDir", DEFAULT_OUTPUT_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory where the log files of this
+	 * application will be stored
+	 */
+	public final PathProperty logDirectory = new PathProperty("logDir", DEFAULT_LOG_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory where resulting samples will be
+	 * stored
+	 */
+	public final PathProperty samplesDirectory = new PathProperty("sampleDir", DEFAULT_SAMPLES_DIRECTORY);
+	/**
+	 * {@PathProperty} that defines the directory where temporary files will be
+	 * stored
+	 */
+	public final PathProperty tempDirectory = new PathProperty("tempDir", DEFAULT_TEMP_DIR);
+	
+	public final PathProperty requestDir = new PathProperty("request", DEFAULT_REQUEST_PATH);
+
+// Define Path variables
 	/** Path to the folder containing sampling algorithm implementations files. */
 	public Path algorithmPath;
 	/** Path to the folder containing configuration files. */
@@ -166,6 +226,8 @@ public class SamplingConfig {
 	/** Path to the folder containing temporary files. */
 	public Path tempPath;
 	
+	public Path requestPath; 
+
 //############ Definition of utility fields
 	/**
 	 * List containing the IDS of all systems that should be used in the current
@@ -177,6 +239,16 @@ public class SamplingConfig {
 	 * benchmark.
 	 */
 	public List<String> systemNames = new ArrayList<>();
+	
+	/**
+	 * enables the calculation of calculating a custom evaluation
+	 */
+	public boolean doCustomRecommendation = false; 
+	
+	/**
+	 * enables that the sample evaluation will be executed
+	 */
+	public boolean doSampling = false; 
 
 //############# Constructor Defintion
 	/**
@@ -202,11 +274,10 @@ public class SamplingConfig {
 		this.configPath = Paths.get(DEFAULT_CONFIG_DIRECTORY);
 		readConfig(configName);
 	}
-	
+
 	/**
-	 * Creates a {@link SamplingConfig} at the
-	 * <code> configPath </code> and reads the configuration
-	 * with the given <code>configName</code>.
+	 * Creates a {@link SamplingConfig} at the <code> configPath </code> and reads
+	 * the configuration with the given <code>configName</code>.
 	 * 
 	 * @param configPath File path of the configuration folder.
 	 * @param configName File name of the configuration.
@@ -215,7 +286,7 @@ public class SamplingConfig {
 		this.configPath = Paths.get(configPath);
 		readConfig(configName);
 	}
-	
+
 //########## Declaration of Methods 
 	/**
 	 * Return the file name for a given path if the {@link Path} points to a
@@ -250,13 +321,21 @@ public class SamplingConfig {
 			readConfigFile(this.configPath.resolve(configName + CONFIG_FILE_EXTENSION));
 		} catch (Exception e) {
 		}
-		inputPath = Paths.get(DEFAULT_INPUT_DIRECTORY);
-		algorithmPath = Paths.get(DEFAULT_ALGORITHMS_DIRECTORY);
-		outputPath = Paths.get(DEFAULT_OUTPUT_DIRECTORY);
-		csvPath = outputPath.resolve(DEFAULT_DATA_DIRECTORY);
-		samplesPath = outputPath.resolve(DEFAULT_SAMPLES_DIRECTORY);
-		tempPath = outputPath.resolve("temp");
-		logPath = outputPath.resolve("log-" + System.currentTimeMillis());
+		inputPath = inputDirectory.getValue();
+		algorithmPath = algorithmDirectory.getValue();
+		outputPath = outputDirectory.getValue();
+		csvPath = csvDirectory.getValue();
+		samplesPath = samplesDirectory.getValue();
+		tempPath = tempDirectory.getValue();
+		logPath = logDirectory.getValue().resolve("log-" + System.currentTimeMillis());
+		
+//		inputPath = Paths.get(DEFAULT_INPUT_DIRECTORY);
+//		algorithmPath = Paths.get(DEFAULT_ALGORITHMS_DIRECTORY);
+//		outputPath = Paths.get(DEFAULT_OUTPUT_DIRECTORY);
+//		csvPath = outputPath.resolve(DEFAULT_DATA_DIRECTORY);
+//		samplesPath = outputPath.resolve(DEFAULT_SAMPLES_DIRECTORY);
+//		tempPath = outputPath.resolve("temp");
+//		logPath = outputPath.resolve("log-" + System.currentTimeMillis());
 	}
 
 	/**
@@ -273,11 +352,12 @@ public class SamplingConfig {
 		try {
 			properties.load(Files.newInputStream(path));
 			for (IProperty prop : propertyList) {
-				Logger.getInstance().logInfo("Property contained in prop list: " + prop.getKey(), false);
 				String value = properties.getProperty(prop.getKey());
 				if (value != null) {
 					prop.setValue(value);
 				}
+				Logger.getInstance()
+				.logInfo("Property contained in prop list: " + prop.getKey() + "=" + prop.getValue(), true);
 			}
 			Logger.getInstance().logInfo("Success!", false);
 			return properties;
@@ -313,10 +393,15 @@ public class SamplingConfig {
 	}
 
 	public void refreshPaths() {
-		csvPath = outputPath.resolve(DEFAULT_DATA_DIRECTORY);
-		samplesPath = outputPath.resolve(DEFAULT_SAMPLES_DIRECTORY);
-		tempPath = outputPath.resolve("temp");
-		logPath = outputPath.resolve("log-" + System.currentTimeMillis());
+		csvPath = csvDirectory.getValue();
+		samplesPath = samplesDirectory.getValue();
+		tempPath = tempDirectory.getValue();
+		logPath = logDirectory.getValue().resolve("log-" + System.currentTimeMillis());
+//		
+//		csvPath = outputPath.resolve(DEFAULT_DATA_DIRECTORY);
+//		samplesPath = outputPath.resolve(DEFAULT_SAMPLES_DIRECTORY);
+//		tempPath = outputPath.resolve("temp");
+//		logPath = outputPath.resolve("log-" + System.currentTimeMillis());
 		readSystemNames();
 	}
 

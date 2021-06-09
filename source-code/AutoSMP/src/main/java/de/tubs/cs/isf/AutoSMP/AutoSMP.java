@@ -19,6 +19,7 @@ import de.ovgu.featureide.fm.core.io.manager.SimpleFileHandler;
 import de.tubs.cs.isf.AutoSMP.algorithms.ASamplingAlgorithm;
 import de.tubs.cs.isf.AutoSMP.config.SamplingConfig;
 import de.tubs.cs.isf.AutoSMP.config.properties.IProperty;
+import de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender;
 import de.tubs.cs.isf.AutoSMP.logger.Logger;
 import de.tubs.cs.isf.AutoSMP.modules.AlgorithmLoaderModule;
 import de.tubs.cs.isf.AutoSMP.modules.ParameterParserModule;
@@ -49,13 +50,19 @@ public class AutoSMP {
 		}
 
 		final AutoSMP evaluator = new AutoSMP(args[0], args[1]);
-//		if (evaluator.parseParameter(args)) {
-//			evaluator.init();
-//			evaluator.run();
-//			evaluator.dispose();
-//		} else {
-//			Logger.getInstance().logInfo("Stopping framework. Reason: see [Error] above!", 0, false);
-//		}
+		if (evaluator.parseParameter(args)) {
+			evaluator.init();
+			if(evaluator.config.doSampling) {
+				evaluator.run();
+			}
+			if(evaluator.config.doCustomRecommendation) {
+				evaluator.calculateCustomRecommendation();
+			}
+			evaluator.dispose();
+			Logger.getInstance().logInfo("Shutting down AutoSMP successful!", false);
+		} else {
+			Logger.getInstance().logInfo("Stopping framework. Reason: see [Error] above!", 0, false);
+		}
 	}
 
 	public static String toString(List<String> sample) {
@@ -94,6 +101,8 @@ public class AutoSMP {
 	public StabilityCalculatorModule module_StabilityCalculator;
 
 	public WriterModule module_Writer;
+	
+	public Customrecommender recommender;
 	/**
 	 * The currently evaluated feature model, randomized, in conjunctive normal
 	 * form.
@@ -127,6 +136,7 @@ public class AutoSMP {
 		module_AlgorithmLoader = new AlgorithmLoaderModule(this);
 		module_StabilityCalculator = new StabilityCalculatorModule(this);
 		module_Writer = new WriterModule(this);
+		recommender = new Customrecommender(this);
 	}
 
 	/**
@@ -145,6 +155,7 @@ public class AutoSMP {
 		module_AlgorithmLoader = new AlgorithmLoaderModule(this);
 		module_StabilityCalculator = new StabilityCalculatorModule(this);
 		module_Writer = new WriterModule(this);
+		recommender = new Customrecommender(this);
 	}
 
 	protected CNF adaptModel() throws Exception {
@@ -179,6 +190,7 @@ public class AutoSMP {
 	}
 
 	public void dispose() {
+		Logger.getInstance().logInfo("Disposing AutoSMP", false);
 		Logger.getInstance().uninstall();
 		if (!config.debug.getValue()) {
 			deleteTempFolder();
@@ -256,7 +268,12 @@ public class AutoSMP {
 		module_Writer.init();
 
 		systems = new IFeatureModel[config.systemNames.size()];
-		module_StabilityCalculator.init();
+		Logger.getInstance().logInfo("systemNames and size: " + config.systemNames + " // " + config.systemNames.size(), true);
+		 module_StabilityCalculator.init();
+		 
+		if(this.config.doCustomRecommendation) {
+			recommender.init();
+		}
 
 		Logger.getInstance().logInfo("Running " + this.getClass().getSimpleName(), false);
 	}
@@ -410,6 +427,10 @@ public class AutoSMP {
 		} else {
 			Logger.getInstance().logInfo("Nothing to do", false);
 		}
+	}
+	
+	public void calculateCustomRecommendation() {
+		recommender.recommend();
 	}
 
 	/**
