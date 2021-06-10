@@ -20,6 +20,7 @@ import de.tubs.cs.isf.AutoSMP.algorithms.ASamplingAlgorithm;
 import de.tubs.cs.isf.AutoSMP.config.SamplingConfig;
 import de.tubs.cs.isf.AutoSMP.config.properties.IProperty;
 import de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender;
+import de.tubs.cs.isf.AutoSMP.customRecommender.RecommendationConfig;
 import de.tubs.cs.isf.AutoSMP.logger.Logger;
 import de.tubs.cs.isf.AutoSMP.modules.AlgorithmLoaderModule;
 import de.tubs.cs.isf.AutoSMP.modules.ParameterParserModule;
@@ -120,6 +121,7 @@ public class AutoSMP {
 	 * Contains all systems feature models to be used for the stability calculation
 	 */
 	public IFeatureModel[] systems = null;
+	
 
 	/**
 	 * Creates a new {@link AutoSMP} that automatically read the configuration, set
