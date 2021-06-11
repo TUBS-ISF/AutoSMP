@@ -38,16 +38,15 @@ public class RecommendationResult implements Comparable<RecommendationResult>{
 	}
 	
 	public void calculateScore(double minSize, double minTime, double maxCover, double maxStab) {
-		double size = this.size / minSize;
-		double time = this.time / minTime; 
-		double coverage = this.coverage / maxCover;
-		double stability = this.stability / maxStab;
+		double size = this.size / (1 + minSize);
+		double time = this.time / (1 + minTime); 
+		double coverage = this.coverage / (1 + maxCover);
+		double stability = this.stability / (1 + maxStab);
 		
 		this.publicScore = size + time + coverage + stability;
 	}
 	
 	public void calcualteInterScore(int sizeWeight, int timeWeight, int coverageWeigth, int stabilityWeight) {
-		Logger.getInstance().logInfo("Score calculation not implemented yet", false);
 		size = arithmeticMean(sizeList) * sizeWeight;
 		time = arithmeticMean(timeList) * timeWeight; 
 		stability = arithmeticMean(stabilityList) * stabilityWeight; 

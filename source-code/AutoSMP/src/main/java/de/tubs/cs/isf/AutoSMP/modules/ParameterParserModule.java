@@ -191,10 +191,10 @@ public class ParameterParserModule {
 		
 		// 6) Defintion of request path
 		if(arguments.contains(PARAMETER_REQUEST)) {
-			Logger.getInstance().logInfo("Reading Request path.", false);
+			Logger.getInstance().logInfo("Reading Request path.", true);
 			int index = arguments.lastIndexOf(PARAMETER_REQUEST);
 			if(arguments.size() >= index+1) {
-				Logger.getInstance().logInfo(arguments.get(index+1), false);
+				Logger.getInstance().logInfo(arguments.get(index+1), true);
 				Path requestPath = Paths.get(arguments.get(index+1));
 				config.requestPath = requestPath;
 				config.doCustomRecommendation = true;
@@ -211,7 +211,6 @@ public class ParameterParserModule {
 		else {
 			config.doSampling = true;
 		}
-		Logger.getInstance().logInfo(" ", 0, false);
 		return true;
 	}
 }

@@ -43,7 +43,7 @@ public class Customrecommender {
 	}
 	
 	public void recommend() {
-		Logger.getInstance().logInfo("Processing request", false);
+		Logger.getInstance().logInfo("Processing request...", false);
 		
 		for(String benchmark : requestConfig.benchmarks) {
 			Path evaluationResults = getEvalResPath(benchmark);
@@ -63,7 +63,7 @@ public class Customrecommender {
 			calculateScore(benchmark);
 			writeRecommendation(benchmark);
 		}
-		Logger.getInstance().logInfo("Processing Request Sucess!!", false);
+		Logger.getInstance().logInfo("Sucess!!", false);
 	}
 	
 	
@@ -90,12 +90,24 @@ public class Customrecommender {
 		recomResults.addAll(recomMap.values());
 		Collections.sort(recomResults);
 		
+		List<String> header = new ArrayList<>();
+		header.add("Rank");
+		header.add("Algorithm");
+		header.add("Score");
+		header.add("Size");
+		header.add("Time");
+		header.add("Coverage");
+		header.add("Stability");
+		
 		writer.setOutputPath(Paths.get(requestConfig.outPut.toString() + "/" + benchmark));
-		writer.addHeaderValue("Rank; Score; Size; Time; Coverage; Stability");
+		writer.setFileName("recommendation.csv");
+		writer.setHeader(header);
 		
 		for(RecommendationResult entry : recomResults) {
 			List<String> line = new ArrayList<>();
-			line.add(recomResults.indexOf(entry)+"");
+			int rank = recomResults.indexOf(entry) + 1;
+			line.add(rank+"");
+			line.add(entry.algorithm);
 			line.add(entry.publicScore+"");
 			line.add(entry.size+"");
 			line.add(entry.time+"");
@@ -111,7 +123,7 @@ public class Customrecommender {
 		Path evalRoot = sampler.getConfig().csvPath;
 		for(File file : evalRoot.toFile().listFiles()) {
 			if(!file.isDirectory()) {
-				Logger.getInstance().logInfo("File name: " + file.getName(), false);
+				Logger.getInstance().logInfo("File name: " + file.getName(), true);
 				if(file.getName().equals(benchmark+".csv")) {
 					evalResPath = file.toPath();
 				}
@@ -122,9 +134,16 @@ public class Customrecommender {
 
 	private void readEvaluationResult(Path path, String benchmark) throws IOException {
 		Scanner sc = new Scanner(path.toFile()); 
-		sc.useDelimiter(this.DELIMITER);
+		sc.useDelimiter("\n");
+		boolean header = true;
 		while(sc.hasNext()) {
-			parseCSVLine(sc.next(), benchmark);
+			if(header == true) {
+				sc.next();
+				header = false;
+			}
+			else {
+				parseCSVLine(sc.next(), benchmark);
+			}
 		}
 	}
 	
@@ -132,16 +151,16 @@ public class Customrecommender {
 		String[] lineValues = line.split(this.DELIMITER);
 		RecommendationResult rr = new RecommendationResult(); 
 		
-		Map<String, RecommendationResult> recomMap = benchmarkMap.get(benchmark);
+		Map<String, RecommendationResult> recomMap = new HashMap<String, RecommendationResult>(); 
 		if(benchmarkMap.containsKey(benchmark)) {
 			recomMap = benchmarkMap.get(benchmark);
 		}
 		
-		String algorithm = lineValues[1];
-		double size = Integer.parseInt(lineValues[10]);
-		double time = Integer.parseInt(lineValues[11]);
-		double coverage = Integer.parseInt(lineValues[12]);
-		double stability = Integer.parseInt(lineValues[16]);
+		String algorithm = lineValues[1];	
+		double size = Double.parseDouble(lineValues[12]);
+		double time = Double.parseDouble(lineValues[11]);
+		double coverage = Double.parseDouble(lineValues[13]);
+		double stability = Double.parseDouble(lineValues[17]);
 		
 		if(recomMap.keySet().contains(algorithm)) {
 			rr = recomMap.get(algorithm);
@@ -178,15 +197,15 @@ public class Customrecommender {
 		rankedList.add(r1);
 		rankedList.add(r4);
 		
-		Logger.getInstance().logInfo("List before sorting:", false);
+		Logger.getInstance().logInfo("List before sorting:", true);
 		for(RecommendationResult rr : rankedList) {
-			Logger.getInstance().logInfo(rr.ID + " // " + rr.publicScore, false);
+			Logger.getInstance().logInfo(rr.ID + " // " + rr.publicScore, true);
 		}
 		
-		Logger.getInstance().logInfo("List after sorting:", false);
+		Logger.getInstance().logInfo("List after sorting:", true);
 		Collections.sort(rankedList);
 		for(RecommendationResult rr : rankedList) {
-			Logger.getInstance().logInfo(rr.ID + " // " + rr.publicScore, false);
+			Logger.getInstance().logInfo(rr.ID + " // " + rr.publicScore, true);
 		}
 	}
 	

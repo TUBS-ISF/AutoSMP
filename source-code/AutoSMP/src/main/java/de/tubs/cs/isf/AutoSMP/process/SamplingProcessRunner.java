@@ -76,11 +76,11 @@ public class SamplingProcessRunner {
 			System.gc();
 			algorithm.preProcess();
 
-			Logger.getInstance().logInfo(algorithm.getCommand(), 1, false);
+			Logger.getInstance().logInfo(algorithm.getCommand(), 1, true);
 
 			final List<String> command = new ArrayList<>(); 
 			if(System.getProperty("os.name").contains("Windows 10")) {
-				Logger.getInstance().logInfo("OS Name: " + System.getProperty("os.name"), false);
+				Logger.getInstance().logInfo("OS Name: " + System.getProperty("os.name"), true);
 				command.add("powershell.exe");
 			}
 			command.addAll(algorithm.getCommandElements());
@@ -95,9 +95,9 @@ public class SamplingProcessRunner {
 //			command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
 
 			if (!command.isEmpty()) {
-				Logger.getInstance().logInfo(command.toString(), false);
+				Logger.getInstance().logInfo(command.toString(), true);
 				final ProcessBuilder processBuilder = new ProcessBuilder(command);
-				Logger.getInstance().logInfo(processBuilder.command().toString(), false);
+				Logger.getInstance().logInfo(processBuilder.command().toString(), true);
 				Process process = null;
 
 				final ErrStreamCollector errStreamCollector = new ErrStreamCollector();
