@@ -1,0 +1,23 @@
+06/11/2021-09:48:55 Initializing recommender
+06/11/2021-09:48:55 Reading request config file. (A:\210_Research\206_AutoSMP_SRC_Repo\configs\request.properties) ... 
+06/11/2021-09:48:55 Success!
+06/11/2021-09:48:55 Running AutoSMP
+06/11/2021-09:48:55 Start
+06/11/2021-09:48:55 	Processing System: Car (1/1)
+06/11/2021-09:48:55 		1/1 | 1/1 | (1/1) SAOB_t2 | 1/1
+06/11/2021-09:48:55 Running External Process
+06/11/2021-09:48:55 	java -da -Xmx4g -Xms2g -jar A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar 
+06/11/2021-09:48:55 OS Name: Windows 10
+06/11/2021-09:48:55 [powershell.exe, java, -da, -Xmx4g, -Xms2g, -jar, A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar]
+06/11/2021-09:48:55 [powershell.exe, java, -da, -Xmx4g, -Xms2g, -jar, A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar]
+06/11/2021-09:48:57 ...
+06/11/2021-09:48:58 ...
+06/11/2021-09:49:00 ...
+06/11/2021-09:49:02 ...
+06/11/2021-09:49:04 ...
+06/11/2021-09:49:06 Data written to file successfully.Sampling process complete
+06/11/2021-09:49:06 Shutting down application
+06/11/2021-09:49:06 Finished
+06/11/2021-09:49:06 Processing request...
+06/11/2021-09:49:06 Sucess!!
+06/11/2021-09:49:06 Disposing AutoSMP

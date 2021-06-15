@@ -1,0 +1,9 @@
+Exception in thread "main" java.lang.NumberFormatException: For input string: "true"
+	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:68)
+	at java.base/java.lang.Integer.parseInt(Integer.java:652)
+	at java.base/java.lang.Integer.parseInt(Integer.java:770)
+	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.parseCSVLine(Customrecommender.java:148)
+	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.readEvaluationResult(Unknown Source)
+	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.recommend(Unknown Source)
+	at de.tubs.cs.isf.AutoSMP.AutoSMP.calculateCustomRecommendation(AutoSMP.java:435)
+	at de.tubs.cs.isf.AutoSMP.AutoSMP.main(AutoSMP.java:60)

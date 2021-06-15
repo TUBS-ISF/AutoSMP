@@ -1,0 +1,16 @@
+06/09/2021-19:06:29 Running AutoSMP
+06/09/2021-19:06:29 Start
+06/09/2021-19:06:29 	Processing System: Car (1/1)
+06/09/2021-19:06:29 		1/1 | 1/1 | (1/1) SAOB_t2 | 1/1
+06/09/2021-19:06:29 Running External Process
+06/09/2021-19:06:29 	java -da -Xmx4g -Xms2g -jar A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar 
+06/09/2021-19:06:29 OS Name: Windows 10
+06/09/2021-19:06:29 [powershell.exe, java, -da, -Xmx4g, -Xms2g, -jar, A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar]
+06/09/2021-19:06:29 [powershell.exe, java, -da, -Xmx4g, -Xms2g, -jar, A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar]
+06/09/2021-19:06:30 ...
+06/09/2021-19:06:32 ...
+06/09/2021-19:06:34 ...
+06/09/2021-19:06:36 ...
+06/09/2021-19:06:38 ...
+06/09/2021-19:06:39 Finished
+06/09/2021-19:06:39 Disposing AutoSMP

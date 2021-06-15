@@ -1,0 +1,13 @@
+06/11/2021-11:03:14 Running AutoSMP
+06/11/2021-11:03:14 Start
+06/11/2021-11:03:14 	Processing System: Car (1/1)
+06/11/2021-11:03:14 		1/1 | 1/1 | (1/1) SAOB_t2 | 1/1
+06/11/2021-11:03:14 Running External Process
+06/11/2021-11:03:15 ...
+06/11/2021-11:03:17 ...
+06/11/2021-11:03:19 ...
+06/11/2021-11:03:22 ...
+06/11/2021-11:03:24 Data written to file successfully.Sampling process complete
+06/11/2021-11:03:24 Shutting down application
+06/11/2021-11:03:24 Finished
+06/11/2021-11:03:24 Disposing AutoSMP

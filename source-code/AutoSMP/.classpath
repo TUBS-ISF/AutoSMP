@@ -20,5 +20,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Utils_JS_SFW_AlgoTools"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/FIDE_Uitls_v3.7_config_gen"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

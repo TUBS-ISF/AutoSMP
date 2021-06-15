@@ -1,0 +1,12 @@
+ERROR: null
+de.ovgu.featureide.fm.core.io.UnsupportedModelException
+	at de.ovgu.featureide.fm.core.io.csv.ConfigurationListFormat.read(ConfigurationListFormat.java:100)
+	at de.ovgu.featureide.fm.core.io.csv.ConfigurationListFormat.read(ConfigurationListFormat.java:42)
+	at de.ovgu.featureide.fm.core.io.manager.SimpleFileHandler.parse(SimpleFileHandler.java:255)
+	at de.ovgu.featureide.fm.core.io.manager.SimpleFileHandler.read(SimpleFileHandler.java:212)
+	at de.ovgu.featureide.fm.core.io.manager.SimpleFileHandler.load(SimpleFileHandler.java:120)
+	at de.tubs.cs.isf.AlgorithmExample.algorithms.AFIDESampling.parseResults(AFIDESampling.java:40)
+	at de.tubs.cs.isf.AutoSMP.process.SamplingProcessRunner.setResult(SamplingProcessRunner.java:170)
+	at de.tubs.cs.isf.AutoSMP.process.SamplingProcessRunner.run(SamplingProcessRunner.java:146)
+	at de.tubs.cs.isf.AutoSMP.AutoSMP.run(AutoSMP.java:400)
+	at de.tubs.cs.isf.AutoSMP.AutoSMP.main(AutoSMP.java:54)

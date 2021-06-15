@@ -1,0 +1,10 @@
+Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;ROIC;MSOC;FIMD;ICST;Runtime;Throughput;TotalCreatedBytes;TotalPauseTime;AveragePauseTime
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;false;false;-1;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10352;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10328;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10334;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10350;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10806;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10702;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10739;-1;-1;-1;-1;-1;-1;-1;-1
+Bob;SAOB_t2;0;Car;16;33;1;1;86400000;true;true;10676;-1;-1;-1;-1;-1;-1;-1;-1

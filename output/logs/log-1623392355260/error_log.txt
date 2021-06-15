@@ -1,0 +1,6 @@
+Exception in thread "main" java.lang.NullPointerException: Cannot invoke "java.util.List.add(Object)" because "this.header" is null
+	at de.tubs.cs.isf.AutoSMP.util.CSVWriter.addHeaderValue(CSVWriter.java:53)
+	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.writeRecommendation(Customrecommender.java:94)
+	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.recommend(Customrecommender.java:64)
+	at de.tubs.cs.isf.AutoSMP.AutoSMP.calculateCustomRecommendation(AutoSMP.java:435)
+	at de.tubs.cs.isf.AutoSMP.AutoSMP.main(AutoSMP.java:60)

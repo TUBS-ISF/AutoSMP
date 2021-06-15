@@ -1,0 +1,19 @@
+06/10/2021-08:10:40 Initializing recommender
+06/10/2021-08:10:40 Running AutoSMP
+06/10/2021-08:10:40 Start
+06/10/2021-08:10:40 	Processing System: Car (1/1)
+06/10/2021-08:10:40 		1/1 | 1/1 | (1/1) SAOB_t2 | 1/1
+06/10/2021-08:10:40 Running External Process
+Start preprocessing algorithm
+06/10/2021-08:10:40 	java -da -Xmx4g -Xms2g -jar A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar 
+06/10/2021-08:10:40 OS Name: Windows 10
+06/10/2021-08:10:40 [powershell.exe, java, -da, -Xmx4g, -Xms2g, -jar, A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar]
+06/10/2021-08:10:40 [powershell.exe, java, -da, -Xmx4g, -Xms2g, -jar, A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar]
+06/10/2021-08:10:42 ...
+06/10/2021-08:10:44 ...
+06/10/2021-08:10:46 ...
+06/10/2021-08:10:48 ...
+06/10/2021-08:10:50 ...
+06/10/2021-08:10:51 Finished
+06/10/2021-08:10:51 Processing request
+06/10/2021-08:10:51 Disposing AutoSMP
