@@ -1,0 +1,7 @@
+Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;ROIC;MSOC;FIMD;ICST;Runtime;Throughput;TotalCreatedBytes;TotalPauseTime;AveragePauseTime
+Joshua Sprey;ICPL_t2;0;Automotive02_V2;17743;360672;1;1;86400000;true;false;8052647;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1
+Joshua Sprey;ICPL_t2;1;Automotive01;2514;12789;1;1;86400000;true;true;2959528;951;2;1;9875403;1;-1;-1;-1;-1;2946.24711;99.51325;435783;14.34082;0.04861
+Joshua Sprey;ICPL_t2;2;Automotive02_V4;18617;368804;1;1;86400000;true;false;29592556;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1
+Joshua Sprey;ICPL_t2;3;Automotive02_V3;18435;365986;1;1;86400000;true;false;6523226;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1
+Joshua Sprey;ICPL_t2;4;Linux_2.6.33.3;6468;48732;1;1;86400000;true;true;10173608;509;2;1;72122926;1;-1;-1;-1;-1;10123.21738;98.17247;487001;185.00449;0.75822
+Joshua Sprey;ICPL_t2;5;Automotive02_V1;14011;251713;1;1;86400000;true;false;8140271;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1;-1

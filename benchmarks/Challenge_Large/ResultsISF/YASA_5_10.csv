@@ -1,0 +1,5 @@
+Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;ROIC;MSOC;FIMD;ICST;Runtime;Throughput;TotalCreatedBytes;TotalPauseTime;AveragePauseTime
+Joshua Sprey;YASA_t2_m5;73;Automotive01;2513;10275;1;1;86400000;true;true;1056586;979;2;1;9875403;1;-1;-1;-1;-1;-1;99.9238;55365;0.75922;0.01615
+Joshua Sprey;YASA_t2_m10;73;Automotive01;2513;10275;1;1;86400000;true;true;2078732;971;2;1;9875403;1;-1;-1;-1;-1;-1;99.94305;75979;1.17855;0.01841
+Joshua Sprey;YASA_t2_m5;110;Linux_2.6.33.3;6467;42264;1;1;86400000;true;true;5498608;509;2;1;72122926;1;-1;-1;-1;-1;-1;99.97017;191931;1.63656;0.01144
+Joshua Sprey;YASA_t2_m10;110;Linux_2.6.33.3;6467;42264;1;1;86400000;true;true;11050387;506;2;1;72122926;1;-1;-1;-1;-1;-1;99.97881;278730;2.32169;0.0107
