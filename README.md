@@ -5,34 +5,34 @@ This repository contains the source code and executable jar file for the submiss
 ## Content
 This repository cotains the following data:
 
-###[algorithms](https://github.com/TUBS-ISF/AutoSMP/tree/main/algorithms)
+### [algorithms](https://github.com/TUBS-ISF/AutoSMP/tree/main/algorithms)
 This folder stores the executable sampling algorithms and the interface implementations to call the sampling algorithms with AutoSMP.
 
-###[benchmarks](https://github.com/TUBS-ISF/AutoSMP/tree/main/benchmarks)
+### [benchmarks](https://github.com/TUBS-ISF/AutoSMP/tree/main/benchmarks)
 Contains the benchmarks to evaluate sampling algorithms. The benchmarcks currently contained in this repository are collections of variability models in the FeatureIDE-XML-Format. We classified the variability model by size. To save disc space and download rates the benchmarks are archived. Make sure to unpack the required archives before using AutoSMP.
 
-###[configs](https://github.com/TUBS-ISF/AutoSMP/tree/main/configs)
+### [configs](https://github.com/TUBS-ISF/AutoSMP/tree/main/configs)
 This folder contains system specific configuration files to define the run-time behaviour and basic input and output paths of AutoSMP.
 
-###[custom-evaluation-results](https://github.com/TUBS-ISF/AutoSMP/tree/main/custom-evaluation-results)
+### [custom-evaluation-results](https://github.com/TUBS-ISF/AutoSMP/tree/main/custom-evaluation-results)
 With AutoSMP customized evaluation tables can  be calculated. The customized evaluation tables are stored in this folder.
 
-###[executable](https://github.com/TUBS-ISF/AutoSMP/tree/main/executable)
+### [executable](https://github.com/TUBS-ISF/AutoSMP/tree/main/executable)
 This folder contains the executable jar file of AutoSMP.
 
-###[libraries](https://github.com/TUBS-ISF/AutoSMP/tree/main/libraries)
+### [libraries](https://github.com/TUBS-ISF/AutoSMP/tree/main/libraries)
 Contians a collection of java labraries needed by AutoSMP. This folder is only interesting for those who plan to work with the source code of AutoSMP directly.
 
-###[output](https://github.com/TUBS-ISF/AutoSMP/tree/main/output)
+### [output](https://github.com/TUBS-ISF/AutoSMP/tree/main/output)
 A folder for temporary output files and log files.
 
-###[request](https://github.com/TUBS-ISF/AutoSMP/tree/main/request)
+### [request](https://github.com/TUBS-ISF/AutoSMP/tree/main/request)
 This folder contains the configuration of user requests. A user request tells AutoSMP how to calculate a recommendation table based on previously calculated sample evaluations. User can specify which benchmarks will be considered and how different evaluation criteria for sampling algorithms will be considered.
 
-###[sampling-evaluation-results](https://github.com/TUBS-ISF/AutoSMP/tree/main/sampling-evaluation-results)
+### [sampling-evaluation-results](https://github.com/TUBS-ISF/AutoSMP/tree/main/sampling-evaluation-results)
 This folder contains the results of evaluations performed with AutoSMP. The results are stored as table representation in the CSV file format.
 
-###[source-code](https://github.com/TUBS-ISF/AutoSMP/tree/main/source-code)
+### [source-code](https://github.com/TUBS-ISF/AutoSMP/tree/main/source-code)
 This is the folder where the source-code of AutoSMP is stored. Currently this folder contains the following projects:
 - [AutoSMP](https://github.com/TUBS-ISF/AutoSMP/tree/main/source-code/AutoSMP)
 The source code of our platform AutoSMP
