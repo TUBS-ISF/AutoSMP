@@ -8,7 +8,7 @@ import de.tubs.cs.isf.samplingAlgorithms.util.logger.Logger;
 
 public class Chvatal extends ASamplingAlgorithm{
 	
-	private final String ALGO = "chvatal"; 
+	private final String ALGO = "Chvatal"; 
 	/**
 	 * 
 	 * @param args
@@ -28,7 +28,7 @@ public class Chvatal extends ASamplingAlgorithm{
 		chvatalSampling.runSampling();
 		chvatalSampling.writeSample();
 		
-		Logger.getInstance().logInfo("Starting Chvatal Sampling", false);
+		Logger.getInstance().logInfo("finished Chvatal Sampling", false);
 	}
 	
 	public Chvatal(){
@@ -37,7 +37,7 @@ public class Chvatal extends ASamplingAlgorithm{
 	
 	@Override
 	public void runSampling() {
-		Logger.getInstance().logError("Starting with chvatal sampling", false);
+		Logger.getInstance().logInfo("Running Sampling", false);
 		SPLCAToolConfigurationGenerator cg = new SPLCAToolConfigurationGenerator(this.randomCNF, ALGO, coverage, maxSampleSize);
 		this.sample = LongRunningWrapper.runMethod(cg);
 	}

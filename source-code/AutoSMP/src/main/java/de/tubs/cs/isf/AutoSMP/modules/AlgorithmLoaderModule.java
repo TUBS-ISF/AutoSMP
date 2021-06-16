@@ -86,8 +86,9 @@ public class AlgorithmLoaderModule {
 
 		for (String algorithmName : config.algorithms.getValue()) {
 			final int tValue = config.tCoverage.getValue();
-			final Path sampleFile = config.tempPath.resolve("sample.csv");
-			final Path modelFile = config.tempPath.resolve("model.dimacs");
+			String modelName = sampler.currentSystemName;
+			final Path sampleFile = config.tempPath.resolve(modelName);
+			final Path modelFile = config.tempPath.resolve(modelName + ".dimacs");
 			final Path gcCollectorFile = config.tempPath.resolve("runtimeGC.log");
 			final String minAllocation = config.minimumMemoryAllocation.getValue();
 			final String maxAllocation = config.maximumMemoryAllocation.getValue();

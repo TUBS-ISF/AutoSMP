@@ -1,0 +1,50 @@
+c 1 DigitalCards
+c 2 GearboxTest
+c 3 Navigation
+c 4 Bluetooth
+c 5 USA
+c 6 GPSAntenna
+c 7 USB
+c 8 Europe
+c 9 CD
+c 10 Radio
+c 11 Car
+c 12 Gearbox
+c 13 Automatic
+c 14 Ports
+c 15 Manual
+c 16 Carbody
+p cnf 16 33
+6 -3 0
+12 -15 0
+12 -11 0
+-16 -4 0
+11 -16 0
+1 -5 0
+10 -4 0
+2 -11 0
+11 0
+1 -8 0
+11 -2 0
+-8 -5 0
+-8 12 0
+7 9 -14 0
+12 0
+8 5 -1 0
+11 -12 0
+10 -14 0
+14 -9 0
+3 -6 0
+-12 -10 3 0
+3 -1 0
+11 -10 0
+10 -3 0
+-15 -13 0
+-3 7 0
+16 0
+12 -13 0
+-6 7 0
+16 -11 0
+14 -7 0
+15 13 -12 0
+-16 13 0

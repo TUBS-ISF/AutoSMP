@@ -43,32 +43,6 @@ public class SamplingProcessRunner {
 	public SamplingResults run(ASamplingAlgorithm algorithm) {
 		SamplingResults result = new SamplingResults();
 		Logger.getInstance().logInfo("Running External Process", false);
-//		List<String> command = new ArrayList<String>();
-//		command.add("powershell.exe");
-//		command.add("java");
-//		command.add("-jar");
-//		command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
-//		ProcessBuilder pb = new ProcessBuilder(command);
-////		pb.command("powershell.exe", "/c", "ping -n 3 google.com");
-////		pb.command("bash.exe", "/c", "java -jar A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
-////		pb.command("git-bash.exe", "echo 'hello bash'");
-////		pb.command("powershell.exe", "java --version","echo 'hello powershell'");
-//		try {
-//			Logger.getInstance().logInfo("OS Name: " + System.getProperty("os.name"), false);
-//			Process process = pb.start();
-//			// blocked :(
-//			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-//			String line;
-//			while ((line = reader.readLine()) != null) {
-//				Logger.getInstance().logInfo(line, false);
-//			}
-//			int exitCode = process.waitFor();
-//			System.out.println("\nExited with error code : " + exitCode);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			e.printStackTrace();
-//		}
 
 		boolean terminatedInTime = false;
 		long startTime = 0, endTime = 0;
@@ -84,15 +58,6 @@ public class SamplingProcessRunner {
 				command.add("powershell.exe");
 			}
 			command.addAll(algorithm.getCommandElements());
-//			command.add("java");
-//			command.add("-da");
-//			command.add("-Xmx4g");
-//			command.add("-Xms2g");
-//			command.add("-cp");
-//			command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/*");
-//			command.add("-jar");
-//			command.add("saob.jar");
-//			command.add("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/saob.jar");
 
 			if (!command.isEmpty()) {
 				Logger.getInstance().logInfo(command.toString(), true);

@@ -51,6 +51,12 @@ public class WriterModule {
 	public CSVWriter getDataCSVWriter() {
 		return dataCSVWriter;
 	}
+	
+	public void setFileName(String fileName) {
+		if(dataCSVWriter != null) {
+			dataCSVWriter.setFileName(fileName);
+		}
+	}
 
 	public void init() {
 		dataCSVWriter = new CSVWriter();
@@ -104,33 +110,33 @@ public class WriterModule {
 		if (configurationList != null) {
 
 			// Create sample from solution list
-			Sample sample = new Sample();
-			for (LiteralSet config : configurationList.getSolutions()) {
-				List<String> configList = new ArrayList<>(config.size());
-				for (int lit : config.getLiterals()) {
-					String name = sampler.getRandomizedModelCNF().getVariables().getName(lit);
-					if (lit < 0) {
-						configList.add("-" + name);
-					} else {
-						configList.add(name);
-					}
-				}
-				sample.add(configList);
-			}
-			// Cache sample
-			sampler.module_StabilityCalculator.cacheCurrentSample(sampler.getSystemIteration() - 1,
-					sampler.getAlgorithmIndex(), sample);
+//			Sample sample = new Sample();
+//			for (LiteralSet config : configurationList.getSolutions()) {
+//				List<String> configList = new ArrayList<>(config.size());
+//				for (int lit : config.getLiterals()) {
+//					String name = sampler.getRandomizedModelCNF().getVariables().getName(lit);
+//					if (lit < 0) {
+//						configList.add("-" + name);
+//					} else {
+//						configList.add(name);
+//					}
+//				}
+//				sample.add(configList);
+//			}
+//			// Cache sample
+//			sampler.module_StabilityCalculator.cacheCurrentSample(sampler.getSystemIteration() - 1,
+//					sampler.getAlgorithmIndex(), sample);
 
 			// 5. Write sample metrics
 			writeSamplesInfo(dataCSVWriter, result);
 			// 6. Write memory metrics
 			writeMemory(dataCSVWriter, result);
 			// Save sample
-			if (config.storeSamples.getValue()) {
-				writeSamples(config.systemNames.get(sampler.getSystemIndex()) + "_"
-						+ sampler.getAlgorithmList().get(sampler.getAlgorithmIndex()) + "_"
-						+ sampler.getSystemIteration() + "_" + sampler.getAlgorithmIteration(), sample);
-			}
+//			if (config.storeSamples.getValue()) {
+//				writeSamples(config.systemNames.get(sampler.getSystemIndex()) + "_"
+//						+ sampler.getAlgorithmList().get(sampler.getAlgorithmIndex()) + "_"
+//						+ sampler.getSystemIteration() + "_" + sampler.getAlgorithmIteration(), sample);
+//			}
 		} else {
 			// Write default values
 			for (int i = 0; i < 8; i++) {

@@ -4,13 +4,11 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import de.ovgu.featureide.fm.benchmark.util.Logger;
 import de.ovgu.featureide.fm.core.analysis.cnf.CNF;
 import de.ovgu.featureide.fm.core.analysis.cnf.LiteralSet;
 import de.ovgu.featureide.fm.core.analysis.cnf.formula.FeatureModelFormula;
@@ -18,6 +16,7 @@ import de.ovgu.featureide.fm.core.base.IFeatureModel;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
 import de.ovgu.featureide.fm.core.configuration.Selection;
 import de.tubs.cs.isf.samplingAlgorithms.util.FeatureModelReader;
+import de.tubs.cs.isf.samplingAlgorithms.util.logger.Logger;
 
 public abstract class ASamplingAlgorithm {
 	
@@ -67,7 +66,7 @@ public abstract class ASamplingAlgorithm {
 			Configuration configuration = new Configuration(fmForm);
 
 			for (final int selection : literalSet.getLiterals()) {
-				final String name = modelCNF.getVariables().getName(selection);
+				final String name = randomCNF.getVariables().getName(selection);
 				configuration.setManual(name, selection > 0 ? Selection.SELECTED : Selection.UNSELECTED);
 			}
 			configs.add(configuration);

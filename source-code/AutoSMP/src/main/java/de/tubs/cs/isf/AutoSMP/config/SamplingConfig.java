@@ -96,7 +96,7 @@ public class SamplingConfig {
 	 */
 	private static final String DEFAULT_TEMP_DIR = "temp";
 	
-	private static final String DEFAULT_REQUEST_PATH = "./request.req"; 
+	private static final String DEFAULT_REQUEST_PATH = "./request.properties"; 
 
 //########## Property definition
 	/** Contains all properties after reading the configuration file. */
@@ -138,7 +138,7 @@ public class SamplingConfig {
 	 * {@link BoolProperty} indicates whether temporary files should be deleted or
 	 * not.
 	 */
-	public final BoolProperty debug = new BoolProperty("debug", false);
+	public final BoolProperty debug = new BoolProperty("debug", true);
 	/** {@link StringProperty} indicates the author of the current benchmark. */
 	public final StringProperty maximumMemoryAllocation = new StringProperty("maxAlloc", "Xmx4g");
 	/** {@link StringProperty} indicates the author of the current benchmark. */

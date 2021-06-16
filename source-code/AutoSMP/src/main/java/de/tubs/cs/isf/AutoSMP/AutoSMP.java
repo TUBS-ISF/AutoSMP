@@ -122,6 +122,8 @@ public class AutoSMP {
 	 */
 	public IFeatureModel[] systems = null;
 	
+	public String currentSystemName = "";
+	
 
 	/**
 	 * Creates a new {@link AutoSMP} that automatically read the configuration, set
@@ -163,7 +165,7 @@ public class AutoSMP {
 	protected CNF adaptModel() throws Exception {
 		final CNF randomCNF = modelCNF.randomize(new Random(config.randomSeed.getValue() + systemIteration));
 		final DIMACSFormatCNF format = new DIMACSFormatCNF();
-		final Path fileName = config.tempPath.resolve("model" + "." + format.getSuffix());
+		final Path fileName = config.tempPath.resolve(currentSystemName + "." + format.getSuffix());
 		SimpleFileHandler.save(fileName, randomCNF, format);
 		return randomCNF;
 	}
@@ -327,6 +329,7 @@ public class AutoSMP {
 		return value;
 	}
 
+	//***
 	protected CNF prepareModel() throws Exception {
 		final String systemName = config.systemNames.get(systemIndex);
 
@@ -342,7 +345,7 @@ public class AutoSMP {
 		curSampleDir = config.samplesPath.resolve(systemName);
 		Files.createDirectories(curSampleDir);
 		final DIMACSFormatCNF format = new DIMACSFormatCNF();
-		final Path fileName = curSampleDir.resolve("model." + format.getSuffix());
+		final Path fileName = curSampleDir.resolve(currentSystemName + "." + format.getSuffix());
 		if (config.storeSamples.getValue()) {
 			SimpleFileHandler.save(fileName, modelCNF, format);
 		}
@@ -374,6 +377,12 @@ public class AutoSMP {
 
 			systemLoop: for (systemIndex = 0; systemIndex < systemIndexEnd; systemIndex++) {
 				logSystem();
+				// getting file name for the eval result csv
+				String fileName = config.inputPath.toFile().getName();
+				module_Writer.setFileName(fileName+".csv");
+				Logger.getInstance().logInfo("fileName of eval result " + fileName, false);
+				// store current system name
+				currentSystemName = config.systemNames.get(systemIndex);
 				try {
 					// Load and prepare all algorithms that are registered in the config file
 					algorithmList = module_AlgorithmLoader.loadAndPrepareAlgorithms();
