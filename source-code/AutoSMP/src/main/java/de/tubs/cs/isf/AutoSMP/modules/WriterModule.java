@@ -42,6 +42,15 @@ public class WriterModule {
 	 */
 	private CSVWriter dataCSVWriter;
 	private final AutoSMP sampler;
+	
+//	private List<String> header = Arrays.asList("Author", "AlgorithmID", "ModelID", "ModelName", "Model_Features",
+//			"Model_Constraints", "SystemIteration", "AlgorithmIteration", "Timeout", "InTime", "NoError", "Time",
+//			"Size", "T-Value", "Validity", "Valid Conditions", "Coverage", "ROIC", "MSOC", "FIMD", "ICST",
+//			"Runtime", "Throughput", "TotalCreatedBytes", "TotalPauseTime", "AveragePauseTime");
+	
+	private List<String> header = Arrays.asList("Author", "AlgorithmID", "ModelID", "ModelName", "Model_Features",
+			"Model_Constraints", "SystemIteration", "AlgorithmIteration", "Timeout", "InTime", "NoError", "Time",
+			"Size", "T-Value", "Validity", "Valid Conditions", "Coverage", "Stability");
 
 	public WriterModule(AutoSMP sampler) {
 		this.sampler = sampler;
@@ -64,10 +73,7 @@ public class WriterModule {
 		dataCSVWriter.setOutputPath(config.csvPath);
 		dataCSVWriter.setFileName("data.csv");
 		dataCSVWriter.setKeepLines(false);
-		dataCSVWriter.setHeader(Arrays.asList("Author", "AlgorithmID", "ModelID", "ModelName", "Model_Features",
-				"Model_Constraints", "SystemIteration", "AlgorithmIteration", "Timeout", "InTime", "NoError", "Time",
-				"Size", "T-Value", "Validity", "Valid Conditions", "Coverage", "ROIC", "MSOC", "FIMD", "ICST",
-				"Runtime", "Throughput", "TotalCreatedBytes", "TotalPauseTime", "AveragePauseTime"));
+		dataCSVWriter.setHeader(this.header);
 		dataCSVWriter.flush();
 	}
 
@@ -130,7 +136,7 @@ public class WriterModule {
 			// 5. Write sample metrics
 			writeSamplesInfo(dataCSVWriter, result);
 			// 6. Write memory metrics
-			writeMemory(dataCSVWriter, result);
+//			writeMemory(dataCSVWriter, result);
 			// Save sample
 //			if (config.storeSamples.getValue()) {
 //				writeSamples(config.systemNames.get(sampler.getSystemIndex()) + "_"
@@ -233,7 +239,7 @@ public class WriterModule {
 				}
 			} else {
 				// Just print -1 for non stability mode
-				for (int i = 0; i < 4; i++) {
+				for (int i = 0; i < 1; i++) {
 					dataCSVWriter.addValue(-1);
 				}
 			}

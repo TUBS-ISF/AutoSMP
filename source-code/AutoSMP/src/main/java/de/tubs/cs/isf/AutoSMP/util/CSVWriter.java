@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import de.ovgu.featureide.fm.benchmark.util.Logger;
+
 /**
  * This class is responsible to write results of the sampling framework properly
  * to CSV files. Generally one {@link CSVWriter} is created for each output file
@@ -105,6 +107,15 @@ public class CSVWriter {
 	public void flush() {
 		if (path != null) {
 			final StringBuilder sb = new StringBuilder();
+			try {
+				List<String> currentContent = Files.readAllLines(path);
+				if(currentContent.size() > 1) {
+					values.remove(0);
+				}
+			} 
+			catch (IOException ioEx) {
+				Logger.getInstance().logInfo("evaluation result file does not exist", false);
+			}
 			for (int i = nextLine; i < values.size(); i++) {
 				writer(sb, values.get(i));
 			}

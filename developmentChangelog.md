@@ -31,7 +31,11 @@
 ## 16.06.2021
 - Chvatal algorithm implemented and running
 - reading sample size, sample time and coverage works
-- storing sample does work, needs re-implementation
+- storing sample does not work, needs re-implementation
 - memory analysis needs to be removed from csv files
 - evalautaion result csv append does not work, needs to be checked
 - validity check does not work --> confusion of cnf formulas
+
+## 18.06.2021
+- remove memory information from out out csv (WriterModule line 138)
+- reduce sampling stability to one metric in csv header (writer_module line 46 to 54)
