@@ -25,7 +25,7 @@ public abstract class ASamplingAlgorithm {
 	public String MODELEXT = ".xml";
 	public String CONFEXT = ".config";
 	private FeatureModelReader fmReader = new FeatureModelReader();
-	public Random randomSeed = new Random(0);
+	public Random randomSeed = new Random(100);
 	public int coverage = 2;
 	public int maxSampleSize = 1000;
 	
@@ -87,7 +87,7 @@ public abstract class ASamplingAlgorithm {
 
 			StringBuilder configBuilder = new StringBuilder();
 			for (String feature : conf.getSelectedFeatureNames()) {
-				System.out.println(feature);
+//				System.out.println(feature);
 				if (configBuilder.length() != 0) {
 					configBuilder.append("\n");
 				}
