@@ -39,3 +39,7 @@
 ## 18.06.2021
 - remove memory information from out out csv (WriterModule line 138)
 - reduce sampling stability to one metric in csv header (writer_module line 46 to 54)
+
+## 21.06.2021
+- fix bug Null Pointer when removing unselected features from sample during stability calculation
+- fix bug more than one default value for missing stability is writen

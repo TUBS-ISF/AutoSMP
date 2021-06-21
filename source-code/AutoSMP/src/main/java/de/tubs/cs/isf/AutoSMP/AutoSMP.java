@@ -353,11 +353,6 @@ public class AutoSMP {
 		return modelCNF;
 	}
 
-	private void printConfigFile() {
-		for (IProperty prop : SamplingConfig.getPropertyList()) {
-			Logger.getInstance().logInfo(prop.toString(), 1, false);
-		}
-	}
 
 	protected void randomizeConditions(List<List<ClauseList>> groupedConditions, Random random) {
 		for (List<ClauseList> group : groupedConditions) {

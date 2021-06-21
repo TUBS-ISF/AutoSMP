@@ -11,6 +11,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import de.ovgu.featureide.fm.core.analysis.cnf.IVariables;
 import de.ovgu.featureide.fm.core.analysis.cnf.LiteralSet;
 import de.ovgu.featureide.fm.core.analysis.cnf.SolutionList;
 import de.ovgu.featureide.fm.core.analysis.cnf.generator.configuration.twise.TWiseConfigurationGenerator;
@@ -116,22 +117,23 @@ public class WriterModule {
 		if (configurationList != null) {
 
 			// Create sample from solution list
-//			Sample sample = new Sample();
-//			for (LiteralSet config : configurationList.getSolutions()) {
-//				List<String> configList = new ArrayList<>(config.size());
-//				for (int lit : config.getLiterals()) {
-//					String name = sampler.getRandomizedModelCNF().getVariables().getName(lit);
-//					if (lit < 0) {
-//						configList.add("-" + name);
-//					} else {
-//						configList.add(name);
-//					}
-//				}
-//				sample.add(configList);
-//			}
+			Sample sample = new Sample();
+			for (LiteralSet config : configurationList.getSolutions()) {
+				
+				List<String> featureList = new ArrayList<>(config.size());
+				for (int lit : config.getLiterals()) {
+					String name = sampler.getRandomizedModelCNF().getVariables().getName(Math.abs(lit)-1);
+					if (lit < 0) {
+						featureList.add("-" + name);
+					} else {
+						featureList.add(name);
+					}
+				}
+				sample.add(featureList);
+			}
 //			// Cache sample
-//			sampler.module_StabilityCalculator.cacheCurrentSample(sampler.getSystemIteration() - 1,
-//					sampler.getAlgorithmIndex(), sample);
+			sampler.module_StabilityCalculator.cacheCurrentSample(sampler.getSystemIteration() - 1,
+					sampler.getAlgorithmIndex(), sample);
 
 			// 5. Write sample metrics
 			writeSamplesInfo(dataCSVWriter, result);
@@ -187,6 +189,7 @@ public class WriterModule {
 		dataCSVWriter.addValue(config.tCoverage.getValue());
 		if (configurationList.getSolutions().size() > 0) {
 			// Validity
+			//TODO needs debugging
 			List<LiteralSet> samples = configurationList.getSolutions();
 			TWiseConfigurationTester tester = new TWiseConfigurationTester(sampler.getRandomizedModelCNF());
 			tester.setNodes(TWiseConfigurationGenerator
@@ -221,19 +224,21 @@ public class WriterModule {
 						NumberFormat nf = NumberFormat.getNumberInstance(Locale.US);
 						nf.setGroupingUsed(false); // remove the dots grouping each 3 digits for CSV format
 						nf.setMaximumFractionDigits(5); // remove the fraction digits
-						dataCSVWriter.addValue(nf.format(similarityResult.resultROIC));
-						dataCSVWriter.addValue(nf.format(similarityResult.resultMSOC));
-						dataCSVWriter.addValue(nf.format(similarityResult.resultFIMDC));
-						dataCSVWriter.addValue(nf.format(similarityResult.resultICST));
+						dataCSVWriter.addValue(nf.format(similarityResult.resultHun));
+						// only the result of the hungarian algorithm is used currently
+//						dataCSVWriter.addValue(nf.format(similarityResult.resultROIC));
+//						dataCSVWriter.addValue(nf.format(similarityResult.resultMSOC));
+//						dataCSVWriter.addValue(nf.format(similarityResult.resultFIMDC));
+//						dataCSVWriter.addValue(nf.format(similarityResult.resultICST));
 					} else {
 						// Just print -1 for skipped iterations
-						for (int i = 0; i < 4; i++) {
+						for (int i = 0; i < 1; i++) {
 							dataCSVWriter.addValue(-1);
 						}
 					}
 				} else {
 					// Just print -1 for first iteration
-					for (int i = 0; i < 4; i++) {
+					for (int i = 0; i < 1; i++) {
 						dataCSVWriter.addValue(-1);
 					}
 				}

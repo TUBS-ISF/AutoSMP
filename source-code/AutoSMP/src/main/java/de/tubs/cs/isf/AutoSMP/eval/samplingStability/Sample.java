@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import de.ovgu.featureide.fm.benchmark.util.Logger;
+
 /**
  * Data structure used to represent samples. Was especially created to calculate
  * the sample stability with the {@link SamplingStabilityEvaluator}.
@@ -37,8 +39,24 @@ public class Sample extends ArrayList<List<String>> {
 	 */
 	public Sample omitNegatives() {
 		Sample sample = new Sample();
-		for (List<String> list : this) {
-			sample.add(list.stream().filter(e -> !e.startsWith("-")).collect(Collectors.toList()));
+		for (List<String> config : this) {
+			List<String> selectedFeatures = new ArrayList<>();
+			for(String feature : config) {
+				if(feature == null) {
+					Logger.getInstance().logInfo("feature is null: " + feature, false);
+				}
+				else if(feature.equals("-null")) {
+					Logger.getInstance().logInfo("feature is -null: " + feature, false);
+				}
+				else {
+					Logger.getInstance().logInfo("feature name: " + feature, true);
+					if(!feature.startsWith("-")) {
+						selectedFeatures.add(feature);
+					}
+				}
+				sample.add(selectedFeatures);
+			}
+//			sample.add(list.stream().filter(e -> !e.startsWith("-")).collect(Collectors.toList()));
 		}
 		return sample;
 	}

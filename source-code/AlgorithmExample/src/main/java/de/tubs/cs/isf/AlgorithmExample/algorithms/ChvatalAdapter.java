@@ -46,13 +46,10 @@ public class ChvatalAdapter extends AJavaMemoryTWiseSamplingAlgorithm {
 		// path to feature model
 		Logger.getInstance().logInfo("Path of model file: " + getPathOfModelFile(), false);
 		addCommandElement(getPathOfModelFile().toString());
-//		addCommandElement("A:\\210_Research\\206_AutoSMP_SRC_Repo\\benchmarks\\Test_Car\\Car.xml");
 		// path to output directory
 		this.outPutPath = getPathOfOutputFile().toString() + "_" + this.getName() +"_" + "t" + getT();
-		Logger.getInstance().logInfo("Path of outpur dir: " + this.outPutPath, false);
 		
 		addCommandElement(this.outPutPath);
-//		addCommandElement("A:\\210_Research\\206_AutoSMP_SRC_Repo\\output\\samples\\TestCar");
 		// t-wise coverage
 		addCommandElement(getT()+"");
 		// max sample size

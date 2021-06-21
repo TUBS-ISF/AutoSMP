@@ -80,11 +80,6 @@ public class SamplingProcessRunner {
 					outThread.start();
 					errThread.start();
 
-					BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-					String line;
-					while((line = reader.readLine()) != null) {
-						Logger.getInstance().logInfo(line, false);
-					}
 					terminatedInTime = process.waitFor(timeout, TimeUnit.MILLISECONDS);
 					endTime = System.nanoTime();
 					

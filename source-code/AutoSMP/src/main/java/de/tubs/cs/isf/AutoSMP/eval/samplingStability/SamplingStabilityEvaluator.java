@@ -11,6 +11,7 @@ import de.ovgu.featureide.fm.core.configuration.Selection;
 import de.ovgu.featureide.fm.core.io.manager.FeatureModelManager;
 import de.ovgu.featureide.fm.core.io.manager.IFeatureModelManager;
 import de.tubs.cs.isf.AutoSMP.eval.samplingStability.metrics.FIMDC;
+import de.tubs.cs.isf.AutoSMP.eval.samplingStability.metrics.Hungarian;
 import de.tubs.cs.isf.AutoSMP.eval.samplingStability.metrics.ICSTMetric;
 import de.tubs.cs.isf.AutoSMP.eval.samplingStability.metrics.MSOC;
 import de.tubs.cs.isf.AutoSMP.eval.samplingStability.metrics.ROIC;
@@ -28,10 +29,14 @@ public class SamplingStabilityEvaluator {
 	 * @author Joshua Sprey
 	 */
 	public class SampleSimilarityResult {
+		// only the result of calculating sampling stability with the hungarian algorithm will be printed 
+		public double resultHun = -1;
+		
 		public double resultFIMDC = -1;
 		public double resultICST = -1;
 		public double resultMSOC = -1;
 		public double resultROIC = -1;
+		
 	}
 
 	/** The feature model of the new samples. */
@@ -82,21 +87,26 @@ public class SamplingStabilityEvaluator {
 	 */
 	public SampleSimilarityResult execut() {
 		SampleSimilarityResult result = new SampleSimilarityResult();
-		// 1) ROIC
-		ROIC roic = new ROIC();
-		result.resultROIC = roic.analyze(fmOld, sampleOld, fmNew, sampleNew);
-
-		// 2) MSOC
-		MSOC msoc = new MSOC();
-		result.resultMSOC = msoc.analyze(fmOld, sampleOld, fmNew, sampleNew);
-
-		// 3) FIMDC
-		FIMDC fimdc = new FIMDC();
-		result.resultFIMDC = fimdc.analyze(fmOld, sampleOld, fmNew, sampleNew);
-
-		// 4) ICSTMetric
-		ICSTMetric icst = new ICSTMetric();
-		result.resultICST = icst.analyze(fmOld, sampleOld, fmNew, sampleNew);
+		// 1) Hungarian
+		Hungarian hungarian = new Hungarian();
+		result.resultHun = hungarian.analyze(fmOld, sampleOld, fmNew, sampleNew);
+		
+		// currently only hungarian algorithm will be claculated to achieve sampling stability
+//		// 2) ROIC
+//		ROIC roic = new ROIC();
+//		result.resultROIC = roic.analyze(fmOld, sampleOld, fmNew, sampleNew);
+//
+//		// 3) MSOC
+//		MSOC msoc = new MSOC();
+//		result.resultMSOC = msoc.analyze(fmOld, sampleOld, fmNew, sampleNew);
+//
+//		// 4) FIMDC
+//		FIMDC fimdc = new FIMDC();
+//		result.resultFIMDC = fimdc.analyze(fmOld, sampleOld, fmNew, sampleNew);
+//
+//		// 5) ICSTMetric
+//		ICSTMetric icst = new ICSTMetric();
+//		result.resultICST = icst.analyze(fmOld, sampleOld, fmNew, sampleNew);
 		return result;
 	}
 

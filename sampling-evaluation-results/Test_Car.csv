@@ -1,2 +1,8 @@
 Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;Stability
-Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1658;6;2;0.0;116;0.6810344827586207;-1
+Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;Stability
+Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1672;6;2;0.0;116;0.6810344827586207;-1;-1;-1;-1
+Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;false;false;-1;6;2;0.0;116;0.6810344827586207;1
+Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1653;6;2;0.0;116;0.6810344827586207;-1
+Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;true;true;1661;6;2;0.0;116;0.6810344827586207;1
+Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1725;6;2;0.0;116;0.6810344827586207;-1
+Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;true;true;1656;6;2;0.0;116;0.6810344827586207;1
