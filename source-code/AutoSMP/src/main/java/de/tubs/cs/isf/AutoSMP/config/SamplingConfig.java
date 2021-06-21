@@ -97,6 +97,10 @@ public class SamplingConfig {
 	private static final String DEFAULT_TEMP_DIR = "temp";
 	
 	private static final String DEFAULT_REQUEST_PATH = "./request.properties"; 
+	
+	private static final int DEFAULT_MAXSIZE = 1000;
+	
+	private static final int DEFAULT_RANDOMSEED = 100;
 
 //########## Property definition
 	/** Contains all properties after reading the configuration file. */
@@ -144,7 +148,7 @@ public class SamplingConfig {
 	/** {@link StringProperty} indicates the author of the current benchmark. */
 	public final StringProperty minimumMemoryAllocation = new StringProperty("minAlloc", "Xms2g");
 	/** {@link Seed} determines the seed for each randomized operation. */
-	public final LongProperty randomSeed = new LongProperty("seed", System.currentTimeMillis());
+	public final IntProperty randomSeed = new IntProperty("randomSeed", DEFAULT_RANDOMSEED);
 	/**
 	 * {@link BoolProperty} indicates whether computed samples should be saved or
 	 * not.
@@ -164,6 +168,7 @@ public class SamplingConfig {
 	public final LongProperty timeout = new LongProperty("timeout", Long.MAX_VALUE);
 	/** {@link IntProperty} indicates the verbosity of output information. */
 	public final IntProperty verbosity = new IntProperty("verbosity", 0);
+	public final IntProperty maxSize = new IntProperty("maxSize", DEFAULT_MAXSIZE);
 
 	// ########## Define Path properties
 	/**

@@ -15,9 +15,9 @@ public abstract class AJavaMemoryTWiseSamplingAlgorithm extends ASamplingAlgorit
 	protected final String maximumMemoryAllocation;
 	protected final String minimumMemoryAllocation;
 
-	public AJavaMemoryTWiseSamplingAlgorithm(Path fmFile, Path outputFile, int t, Path gcCollectorPath,
+	public AJavaMemoryTWiseSamplingAlgorithm(Path algoPath, Path fmFile, Path outputFile, int t, int maxSize, int randomSeed, Path gcCollectorPath,
 			String minimumMemoryAllocation, String maximumMemoryAllocation) {
-		super(fmFile, outputFile, t);
+		super(algoPath, fmFile, outputFile, t, maxSize, randomSeed);
 		this.gcCollectorPath = gcCollectorPath;
 		this.minimumMemoryAllocation = minimumMemoryAllocation;
 		this.maximumMemoryAllocation = maximumMemoryAllocation;

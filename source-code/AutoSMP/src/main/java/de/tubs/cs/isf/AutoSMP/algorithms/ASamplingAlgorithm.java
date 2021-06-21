@@ -21,11 +21,18 @@ public abstract class ASamplingAlgorithm implements IOutputReader {
 	protected int iterations = -1;
 	protected final Path outputFile;
 	protected final int t;
+	
+	protected final int maxSize; 
+	protected final int randomSeed;
+	protected final Path algoPath;
 
-	public ASamplingAlgorithm(Path fmFile, Path outputFile, int t) {
+	public ASamplingAlgorithm(Path algoPath, Path fmFile, Path outputFile, int t, int maxSize, int randomSeed) {
 		this.fmFile = fmFile;
 		this.outputFile = outputFile;
 		this.t = t;
+		this.maxSize = maxSize;
+		this.randomSeed = randomSeed;
+		this.algoPath = algoPath;
 	}
 
 	/**

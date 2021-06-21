@@ -1,4 +1,4 @@
-package de.tubs.cs.isf.AlgorithmExample.algorithms;
+package de.tubs.cs.isf.algorithmAdapters.fideAdapter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -27,31 +27,32 @@ import de.tubs.cs.isf.AutoSMP.algorithms.AJavaMemoryTWiseSamplingAlgorithm;
 import de.tubs.cs.isf.AutoSMP.logger.Logger;
 import de.tubs.cs.isf.AutoSMP.util.FeatureModelReader;
 
-public class ChvatalAdapter extends AJavaMemoryTWiseSamplingAlgorithm {
-	
+public class AdapterChvatal extends AJavaMemoryTWiseSamplingAlgorithm {
+
 	private FeatureModelReader fmReader = new FeatureModelReader();
 	private String outPutPath = "";
 
-	public ChvatalAdapter(Path algoPath, Path fmFile, Path outputFile, int t, int maxSize, int randomSeed, Path gcCollectorPath, String minimumMemoryAllocation, String maximumMemoryAllocation) {
-		super(algoPath, fmFile, outputFile, t, maxSize, randomSeed, gcCollectorPath, minimumMemoryAllocation, maximumMemoryAllocation);
+	public AdapterChvatal(Path algoPath, Path fmFile, Path outputFile, int t, int maxSize, int randomSeed,
+			Path gcCollectorPath, String minimumMemoryAllocation, String maximumMemoryAllocation) {
+		super(algoPath, fmFile, outputFile, t, maxSize, randomSeed, gcCollectorPath, minimumMemoryAllocation,
+				maximumMemoryAllocation);
 	}
-	
+
 	@Override
 	protected void addCommandElements() {
 		// initializing jar execution
 		addCommandElement("-jar");
 		// path to jar file
-//		addCommandElement("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/chvatal.jar");
+//				addCommandElement("A:/210_Research/206_AutoSMP_SRC_Repo/algorithms/tools/chvatal.jar");
 		addCommandElement(algoPath.resolve("tools/chvatal.jar").toString());
 		// path to feature model
 		Logger.getInstance().logInfo("Path of model file: " + getPathOfModelFile(), false);
 		addCommandElement(getPathOfModelFile().toString());
 		// path to output directory
-		this.outPutPath = getPathOfOutputFile().toString() + "_" + this.getName() +"_" + "t" + getT();
-		
+		this.outPutPath = getPathOfOutputFile().toString() + "_" + this.getName() + "_" + "t" + getT();
 		addCommandElement(this.outPutPath);
 		// t-wise coverage
-		addCommandElement(getT()+"");
+		addCommandElement(getT() + "");
 		// max sample size
 		addCommandElement(Integer.toString(maxSize));
 		// random seed
@@ -65,83 +66,82 @@ public class ChvatalAdapter extends AJavaMemoryTWiseSamplingAlgorithm {
 
 	@Override
 	public String getParameterSettings() {
-		return "t="+t;
+		return "t=" + t;
 	}
 
 	@Override
 	public SolutionList parseResults() throws IOException {
 		Logger.getInstance().logInfo("parsing solution list", false);
 		IFeatureModel fm = fmReader.loadFile(getPathOfModelFile());
-		FeatureModelFormula fmForm = new FeatureModelFormula(fm); 
+		FeatureModelFormula fmForm = new FeatureModelFormula(fm);
 		CNF modelCNF = new FeatureModelFormula(fm).getCNF();
-		
+
 		int numberOfConfigurations = 0;
 		int numberOfFeatures = 0;
 		List<String> featureNames = new ArrayList<>();
-		
+
 		List<Configuration> configs = new ArrayList<>();
 		Logger.getInstance().logInfo("outPath: " + outPutPath, false);
-		
+
 		// read the configurations from file
 		try {
 			DirectoryStream<Path> dirStream = Files.newDirectoryStream(Paths.get(outPutPath));
-			for(Path filePath : dirStream) {
+			for (Path filePath : dirStream) {
 				Configuration config = new Configuration(fmForm);
 				// set all features of the feature model as unselected
-				for(IFeature feature : fm.getFeatures()) {
+				for (IFeature feature : fm.getFeatures()) {
 					config.setManual(feature.getName(), Selection.UNSELECTED);
 				}
 				Logger.getInstance().logInfo("Config Name: " + filePath.getFileName(), true);
 				File persConfig = filePath.toFile();
 				Scanner scanner = new Scanner(new BufferedReader(new FileReader(persConfig)));
 				// set features of the persistent configuration as selected
-				while(scanner.hasNext()) {
+				while (scanner.hasNext()) {
 					config.setManual(scanner.next(), Selection.SELECTED);
 				}
 				Logger.getInstance().logInfo("Selected Features: " + config.getSelectedFeatureNames().toString(), true);
 				Logger.getInstance().logInfo("Unselected Features: " + config.getUnSelectedFeatures().toString(), true);
 				configs.add(config);
 			}
+		} catch (IOException | DirectoryIteratorException x) {
 		}
-		catch(IOException | DirectoryIteratorException x) {
-		}
-		
+
 /////////// creating a solutionList
-		
+
 		// get configuration number
 		numberOfConfigurations = configs.size();
 		// get feature number
 		numberOfFeatures = fm.getFeatures().size();
 		// get feature names from fm
-		for(IFeature feature : fm.getFeatures()) {
+		for (IFeature feature : fm.getFeatures()) {
 			featureNames.add(feature.getName());
 		}
-		// create variables 
+		// create variables
 		final Variables variables = new Variables(featureNames);
 		// create int arry configurations
 		List<int[]> intArrayConfigs = new ArrayList<>();
-		for(Configuration conf : configs) {
+		for (Configuration conf : configs) {
 			int[] intArrayConf = new int[variables.size()];
-			for(String feature : featureNames) {
+			for (String feature : featureNames) {
 				int variable = variables.getVariable(feature);
 				int variableIndex = variable - 1;
-				// check if feature is selected of deselected; set it in intArrayConf respectively
-				if(conf.getSelectedFeatureNames().contains(feature)) {
+				// check if feature is selected of deselected; set it in intArrayConf
+				// respectively
+				if (conf.getSelectedFeatureNames().contains(feature)) {
 					intArrayConf[variableIndex] = variable;
-				}
-				else {
+				} else {
 					intArrayConf[variableIndex] = -variable;
 				}
 			}
 			intArrayConfigs.add(intArrayConf);
 		}
-		
+
 		// create list of literal sets
 		final ArrayList<LiteralSet> literalSetConfigs = new ArrayList<>(numberOfConfigurations);
 		for (int[] configuration : intArrayConfigs) {
 			literalSetConfigs.add(new LiteralSet(configuration, Order.INDEX));
 		}
-		
+
 		return new SolutionList(variables, literalSetConfigs);
 	}
 

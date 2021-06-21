@@ -9,9 +9,8 @@ import de.tubs.cs.isf.AutoSMP.logger.Logger;
 
 public class saobAdapter extends AJavaMemoryTWiseSamplingAlgorithm{
 
-	public saobAdapter(Path fmFile, Path outputFile, int t, Path gcCollectorPath, String minimumMemoryAllocation,
-			String maximumMemoryAllocation) {
-		super(fmFile, outputFile, t, gcCollectorPath, minimumMemoryAllocation, maximumMemoryAllocation);
+	public saobAdapter(Path algoPath, Path fmFile, Path outputFile, int t, int maxSize, int randomSeed, Path gcCollectorPath, String minimumMemoryAllocation, String maximumMemoryAllocation) {
+		super(algoPath, fmFile, outputFile, t, maxSize, randomSeed, gcCollectorPath, minimumMemoryAllocation, maximumMemoryAllocation);
 	}
 
 	@Override

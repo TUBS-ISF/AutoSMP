@@ -92,6 +92,9 @@ public class AlgorithmLoaderModule {
 			final Path gcCollectorFile = config.tempPath.resolve("runtimeGC.log");
 			final String minAllocation = config.minimumMemoryAllocation.getValue();
 			final String maxAllocation = config.maximumMemoryAllocation.getValue();
+			final int maxSize = config.maxSize.getValue();
+			final int randomSeed = config.randomSeed.getValue();
+			final Path algoPath = config.algorithmPath;
 			// Try if the given string is a class name for an external algorithm
 			try {
 				if (cl != null) {
@@ -100,13 +103,13 @@ public class AlgorithmLoaderModule {
 					cls = (Class<ASamplingAlgorithm>) cl.loadClass(algorithmName);
 					try {
 						// First try to get a declared constructor for AJavaMemoryTWiseSamplingAlgorithm
-						algorithms.add(cls.getDeclaredConstructor(Path.class, Path.class, int.class, Path.class,
-								String.class, String.class).newInstance(modelFile, sampleFile, tValue, gcCollectorFile,
+						algorithms.add(cls.getDeclaredConstructor(Path.class, Path.class, Path.class, int.class, int.class, int.class, Path.class,
+								String.class, String.class).newInstance(algoPath, modelFile, sampleFile, tValue, maxSize, randomSeed, gcCollectorFile,
 										minAllocation, maxAllocation));
 					} catch (Exception e) {
 						try {
-							algorithms.add(cls.getDeclaredConstructor(Path.class, Path.class, int.class)
-									.newInstance(modelFile, sampleFile, tValue));
+							algorithms.add(cls.getDeclaredConstructor(Path.class, Path.class, Path.class, int.class, int.class, int.class)
+									.newInstance(algoPath, modelFile, sampleFile, tValue, maxSize, randomSeed));
 						} catch (Exception e2) {
 							// When no constructor was found report.
 							Logger.getInstance().logError(e);
