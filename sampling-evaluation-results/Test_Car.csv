@@ -1,8 +1,11 @@
 Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;Stability
-Author;AlgorithmID;ModelID;ModelName;Model_Features;Model_Constraints;SystemIteration;AlgorithmIteration;Timeout;InTime;NoError;Time;Size;T-Value;Validity;Valid Conditions;Coverage;Stability
-Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1672;6;2;0.0;116;0.6810344827586207;-1;-1;-1;-1
-Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;false;false;-1;6;2;0.0;116;0.6810344827586207;1
-Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1653;6;2;0.0;116;0.6810344827586207;-1
-Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;true;true;1661;6;2;0.0;116;0.6810344827586207;1
-Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;1725;6;2;0.0;116;0.6810344827586207;-1
-Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;true;true;1656;6;2;0.0;116;0.6810344827586207;1
+Bob;Chvatal_t=2;0;Car;16;33;1;1;86400000;true;true;667;6;2;0.0;116;0.6810344827586207;-1
+Bob;Chvatal_t=2;1;Car_two;16;33;1;1;86400000;true;true;1674;6;2;0.0;116;0.6810344827586207;1
+Bob;ICPL_t=2;0;Car;16;33;1;1;86400000;true;true;1709;6;2;0.0;116;0.6810344827586207;-1
+Bob;ICPL_t=2;1;Car_two;16;33;1;1;86400000;true;true;1645;6;2;0.0;116;0.6810344827586207;1
+Bob;IncLing_t=2;0;Car;16;33;1;1;86400000;true;true;431;6;2;0.0;116;0.6810344827586207;-1
+Bob;IncLing_t=2;1;Car_two;16;33;1;1;86400000;true;true;516;6;2;0.0;116;0.6810344827586207;1
+Bob;Random_t=2;0;Car;16;33;1;1;86400000;true;true;423;7;2;0.0;116;0.6810344827586207;-1
+Bob;Random_t=2;1;Car_two;16;33;1;1;86400000;true;true;499;7;2;0.0;116;0.6810344827586207;1
+Bob;YASA_t=2;0;Car;16;33;1;1;86400000;true;true;441;6;2;0.0;116;0.6810344827586207;-1
+Bob;YASA_t=2;1;Car_two;16;33;1;1;86400000;true;true;435;6;2;0.0;116;0.6810344827586207;1

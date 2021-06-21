@@ -43,3 +43,7 @@
 ## 21.06.2021
 - fix bug Null Pointer when removing unselected features from sample during stability calculation
 - fix bug more than one default value for missing stability is writen
+- adjust sampling interfaces to take maxSize and randomSeed as parameters
+- make algorithm tool path more dynamic by introducing a parameter in the adapter interfaces
+- tidy-up adapter interfaces by introducing a new project specially for this purpose
+- implement sampling algorithms (Chvatal, ICPL, YASA, IncLing, RandomSamp) in separate project 
