@@ -48,7 +48,7 @@ Contains source code of an example implementation to test the registration of al
 6. Switch to the [executable](https://github.com/TUBS-ISF/AutoSMP/tree/main/executable) folder and open a terminal.
 7. Execute AutoSMP according to the following command structure:
 java -jar ./autoSMP.jar <path to configuration folder> <name of configuration (without extension)> <-sampling> <-request> <path to the request configuration file>
-The <-sampling>, <-request>, and <path to request configuration file> are optional switches you can use to specify which analysis AutoSMP will perform.
+The <-sampling>, <-request>, and <request_path> are optional switches you can use to specify which analysis AutoSMP will perform.
 The *-sampling* switch tells AutoSMP to perform a sample evaluation according to the configuration specified in your configuration file.
 The *-request* switch tells AutoSMP to calculate a recommendation table based on your request configuration.  
-The <path to request configuration file> tells AutoSMP where to find your request configuration. This argument must be provided if you use the *-request* argument. Otherwise it must not appear in the command.
+The <request_path> tells AutoSMP where to find your request configuration. This argument must be provided if you use the *-request* argument. Otherwise it must not appear in the command.
