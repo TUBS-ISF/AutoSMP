@@ -1,2 +1,0 @@
-06/09/2021-19:11:20 Running AutoSMP
-06/09/2021-19:11:20 Disposing AutoSMP

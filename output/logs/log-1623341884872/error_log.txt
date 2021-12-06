@@ -1,6 +1,0 @@
-Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
-	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.parseCSVLine(Customrecommender.java:140)
-	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.readEvaluationResult(Customrecommender.java:127)
-	at de.tubs.cs.isf.AutoSMP.customRecommender.Customrecommender.recommend(Unknown Source)
-	at de.tubs.cs.isf.AutoSMP.AutoSMP.calculateCustomRecommendation(AutoSMP.java:435)
-	at de.tubs.cs.isf.AutoSMP.AutoSMP.main(AutoSMP.java:60)
