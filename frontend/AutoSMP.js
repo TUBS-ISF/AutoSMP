@@ -1,4 +1,5 @@
 let z1 = 2;
+//this method adds new "upload file" section
 function myFunction(id) {
 
 	  var x = document.createElement("INPUT");
@@ -40,7 +41,7 @@ function myFunction(id) {
 	break;
 }
 }
-
+//this method sets the config values to the default values
 	function setDefaultConfig(){
 	document.getElementById("calcStab").checked = true;
 	document.getElementById("verbLog").checked = true;
@@ -55,25 +56,7 @@ function myFunction(id) {
 	document.getElementById("maxSize").value = 1000;
 		
 	}
-	
-	function WriteToConfigFile() {
-       	reader = new FileReader();
-  		reader.addEventListener('load', (event) => {
-    	alert(event.target.result);
-		
-		});
-		
-		var fileToLoad = new File([""],"C:/Users/Farah Sh/Downloads/Job/ISF/Frontend/exampleConfig.properties");
-		
-		reader.readAsDataURL(fileToLoad);
-        
-
-	}
- 
-	function Delet(id){
-	id.parentNode.parentNode.remove();
-
-	}
+//this method reads the uploaded CSV file and displays it in "Table view" tab	
 	function Upload() {
         var fileUpload = document.getElementById("fileUpload");
         var regex = /^([a-zA-Z0-9\s_\\.\-:])+(.csv|.txt)$/;
