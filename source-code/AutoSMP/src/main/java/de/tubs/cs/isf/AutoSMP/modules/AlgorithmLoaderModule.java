@@ -100,7 +100,7 @@ public class AlgorithmLoaderModule {
 				if (cl != null) {
 
 					Class<ASamplingAlgorithm> cls;
-					cls = (Class<ASamplingAlgorithm>) cl.loadClass(algorithmName);
+					cls = (Class<ASamplingAlgorithm>) cl.loadClass(algorithmName.trim());
 					try {
 						// First try to get a declared constructor for AJavaMemoryTWiseSamplingAlgorithm
 						algorithms.add(cls.getDeclaredConstructor(Path.class, Path.class, Path.class, int.class, int.class, int.class, Path.class,
