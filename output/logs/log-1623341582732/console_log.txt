@@ -1,4 +1,0 @@
-06/10/2021-18:13:02 Initializing recommender
-06/10/2021-18:13:02 Reading request config file. (A:\210_Research\206_AutoSMP_SRC_Repo\configs\request.properties) ... 
-06/10/2021-18:13:02 Success!
-06/10/2021-18:13:02 Running AutoSMP

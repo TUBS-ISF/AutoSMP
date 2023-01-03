@@ -1,0 +1,60 @@
+[0.011s][info][gc] Using G1
+[0.013s][info][gc,init] Version: 17+35 (release)
+[0.013s][info][gc,init] CPUs: 8 total, 8 available
+[0.013s][info][gc,init] Memory: 8073M
+[0.013s][info][gc,init] Large Page Support: Disabled
+[0.013s][info][gc,init] NUMA Support: Disabled
+[0.013s][info][gc,init] Compressed Oops: Enabled (32-bit)
+[0.013s][info][gc,init] Heap Region Size: 1M
+[0.013s][info][gc,init] Heap Min Capacity: 8M
+[0.013s][info][gc,init] Heap Initial Capacity: 128M
+[0.014s][info][gc,init] Heap Max Capacity: 1G
+[0.014s][info][gc,init] Pre-touch: Disabled
+[0.014s][info][gc,init] Parallel Workers: 8
+[0.014s][info][gc,init] Concurrent Workers: 2
+[0.014s][info][gc,init] Concurrent Refinement Workers: 8
+[0.014s][info][gc,init] Periodic GC: Disabled
+[0.014s][info][gc,metaspace] CDS archive(s) not mapped
+[0.014s][info][gc,metaspace] Compressed class space mapped at: 0x0000000100000000-0x0000000140000000, reserved size: 1073741824
+[0.014s][info][gc,metaspace] Narrow klass base: 0x0000000000000000, Narrow klass shift: 3, Narrow klass range: 0x140000000
+[0.477s][info][gc,task     ] GC(0) Using 3 workers of 8 for full compaction
+[0.477s][info][gc,start    ] GC(0) Pause Full (System.gc())
+[0.477s][info][gc,phases,start] GC(0) Phase 1: Mark live objects
+[0.479s][info][gc,phases      ] GC(0) Phase 1: Mark live objects 2.111ms
+[0.479s][info][gc,phases,start] GC(0) Phase 2: Prepare for compaction
+[0.480s][info][gc,phases      ] GC(0) Phase 2: Prepare for compaction 0.544ms
+[0.480s][info][gc,phases,start] GC(0) Phase 3: Adjust pointers
+[0.481s][info][gc,phases      ] GC(0) Phase 3: Adjust pointers 0.881ms
+[0.481s][info][gc,phases,start] GC(0) Phase 4: Compact heap
+[0.483s][info][gc,phases      ] GC(0) Phase 4: Compact heap 2.091ms
+[0.484s][info][gc,heap        ] GC(0) Eden regions: 15->0(6)
+[0.484s][info][gc,heap        ] GC(0) Survivor regions: 0->0(0)
+[0.484s][info][gc,heap        ] GC(0) Old regions: 0->7
+[0.484s][info][gc,heap        ] GC(0) Archive regions: 0->0
+[0.484s][info][gc,heap        ] GC(0) Humongous regions: 0->0
+[0.484s][info][gc,metaspace   ] GC(0) Metaspace: 10867K(11072K)->10867K(11072K) NonClass: 9848K(9920K)->9848K(9920K) Class: 1018K(1152K)->1018K(1152K)
+[0.484s][info][gc             ] GC(0) Pause Full (System.gc()) 14M->6M(24M) 6.855ms
+[0.484s][info][gc,cpu         ] GC(0) User=0.06s Sys=0.00s Real=0.01s
+[0.758s][info][gc,task        ] GC(1) Using 2 workers of 8 for full compaction
+[0.758s][info][gc,start       ] GC(1) Pause Full (System.gc())
+[0.758s][info][gc,phases,start] GC(1) Phase 1: Mark live objects
+[0.762s][info][gc,phases      ] GC(1) Phase 1: Mark live objects 3.615ms
+[0.762s][info][gc,phases,start] GC(1) Phase 2: Prepare for compaction
+[0.762s][info][gc,phases      ] GC(1) Phase 2: Prepare for compaction 0.571ms
+[0.762s][info][gc,phases,start] GC(1) Phase 3: Adjust pointers
+[0.764s][info][gc,phases      ] GC(1) Phase 3: Adjust pointers 1.384ms
+[0.764s][info][gc,phases,start] GC(1) Phase 4: Compact heap
+[0.765s][info][gc,phases      ] GC(1) Phase 4: Compact heap 0.965ms
+[0.766s][info][gc,heap        ] GC(1) Eden regions: 4->0(6)
+[0.766s][info][gc,heap        ] GC(1) Survivor regions: 0->0(0)
+[0.766s][info][gc,heap        ] GC(1) Old regions: 7->8
+[0.766s][info][gc,heap        ] GC(1) Archive regions: 0->0
+[0.766s][info][gc,heap        ] GC(1) Humongous regions: 0->0
+[0.766s][info][gc,metaspace   ] GC(1) Metaspace: 13366K(13568K)->13366K(13568K) NonClass: 12106K(12224K)->12106K(12224K) Class: 1259K(1344K)->1259K(1344K)
+[0.766s][info][gc             ] GC(1) Pause Full (System.gc()) 9M->7M(24M) 7.590ms
+[0.766s][info][gc,cpu         ] GC(1) User=0.03s Sys=0.00s Real=0.01s
+[0.963s][info][gc,heap,exit   ] Heap
+[0.963s][info][gc,heap,exit   ]  garbage-first heap   total 24576K, used 8271K [0x00000000c0000000, 0x0000000100000000)
+[0.963s][info][gc,heap,exit   ]   region size 1024K, 1 young (1024K), 0 survivors (0K)
+[0.963s][info][gc,heap,exit   ]  Metaspace       used 13402K, committed 13568K, reserved 1064960K
+[0.963s][info][gc,heap,exit   ]   class space    used 1263K, committed 1344K, reserved 1048576K

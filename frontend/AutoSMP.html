@@ -1,0 +1,229 @@
+<html>
+
+<head>
+	<title>	AutoSMP</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="AutoSMP.js"></script>
+	<style>
+		.table {
+			display: block;
+			overflow-x: scroll;
+			white-space: nowrap;
+			background-color: white;
+		}
+
+		.tab {
+			white-space: nowrap;
+
+		}
+
+
+		.body {
+			background: #ccc;
+			font-family: 'Roboto', sans-serif;
+
+		}
+
+		.mytabs {
+			display: flex;
+			flex-wrap: wrap;
+			max-width: 600px;
+		}
+
+		.mytabs input[type="radio"] {
+			display: none;
+
+		}
+
+		.mytabs label {
+			padding: 15px;
+			width: 200px;
+			background: #e2e2e2;
+			font-weight: bold;
+			border-right: 2px solid GRAY;
+			border-bottom: 2px solid GRAY;
+			text-align: center;
+		}
+
+		.mytabs .tab {
+			width: 100%;
+			order: 1;
+			display: none;
+
+		}
+
+		.mytabs .tab h2 {
+			font-size: 3em;
+
+		}
+
+		.mytabs input[type='radio']:checked+label+.tab {
+			display: block;
+			
+		}
+
+		.mytabs input[type="radio"]:checked+label {
+			background: #fff;
+		}
+
+
+		* {
+			box-sizing: border-box;
+		
+		}
+
+		/* Create three equal columns that floats next to each other */
+		.column {
+			float: left;
+			padding-left: 5px;
+			height: 100%;
+			border-left:2px solid GRAY;
+			 
+		
+		
+			/* Should be removed. Only for demonstration */
+		}
+
+		/* Clear floats after the columns */
+		.row:after {
+			content: "";
+			display: table;
+			clear: none;
+		
+		}
+
+
+
+	</style>
+</head>
+	<h2>User Interface</h2>
+	<div class="row">
+	<body>	
+		<div class="column" style="background-color:#aaa;border-left:0px; padding-left: 0px;" >
+
+			<div class="mytabs">
+				<input type="radio" id="tabgeneralconfig" ; name="mytabs" checked="checked"> 
+				<label for="tabgeneralconfig">General Configuration</label>
+				<div class="tab">
+					<div class="column" style="background-color:#aaa; border-left:0px; padding-left: 5px; width:280px;">
+
+						<br>Store Samples<input type="checkbox" id = storeSam>
+						<br><br><input type="file" id="myFile" name="filename">
+						<br><br>Calculate Stability<input type="checkbox" id = calcStab>
+						<br><br>Verbose Log<input type="checkbox" id = verbLog>
+						<br><br>T-Wise Coverage<textarea rows="1" cols="5" style="margin-left:25px;" id =coverage></textarea>
+						<br><br>System Iterations <textarea rows="1" cols="5" style="margin-left:20px;" id =sysIter></textarea>
+						<br><br>Timeout <input type="number" min="1" max="10000" style="margin-left:78px;"" id =timeout>s
+						<br><br>max Allocation <textarea rows="1" cols="5" style="margin-left:33px;" id = maxAll></textarea>MB
+						<br><br>min Allocation <textarea rows="1" cols="5" min="1" max="5" style="margin-left:35px;" id = minAll></textarea>MB
+						<br><br>Random seed <textarea rows="1" cols="5" style="margin-left:45px;" id =randomSeed></textarea>
+						<br><br>Max Sample Size <textarea rows="1" cols="5" min="1" max="5" style="margin-left:18px;" id =maxSize></textarea>
+						<br><br>Algorithm Iterations <textarea rows="1" cols="5"id = algIter></textarea>
+						<br><br><br><button onclick ="setDefaultConfig()">load default config</button> <button onclick ="WriteToConfigFile()">set config</button> <button>Start</button> 
+					</div>
+					<div class="column" style="background-color:#aaa;">
+						<br><b><u>Algorithms</u></b>
+						<br><br> All <input type="checkbox">
+						<br><br><input type="file" id="myFile" name="filename">
+						<div id="alg">
+						</div>
+						<br><br><button onclick="myFunction(this.id)" id="algorithm"><b>+</b></button> Add Algorithm
+						<br><br><br><br><br><b><u>Benchmarks</u></b>
+						<br><br> All <input type="checkbox">
+						<br><br><input type="file" id="myFile" name="filename">
+						<div id="ben">
+						</div>
+						<br><br><button onclick="myFunction(this.id)" id="benchmark"><b>+</b></button> Add Benchmark
+						<br><br><br><br><button>Calculate</button>
+					</div>
+
+				</div>
+				<input type="radio" id="tabrequest" name="mytabs">
+				<label for="tabrequest">Request</label>
+				<div class="tab">
+					<div class="column" style="background-color:#aaa; width:280px;">		
+						<br><b><u>How should evaluation criteria be</u></b>
+						<br><b><u>weighted?</u></b>
+					
+						<br><br>Size:  <input type="number" min="1" max="5" style ="margin-left:59px;"> 
+						<br><br>Coverage: <input type="number" min="1" max="5" style ="margin-left:25px;">
+						<br><br>Sample Time: <input type="number" min="1" max="5">
+						<br><br>Stability: <textarea rows="1" cols="5" style ="margin-left:32px;"></textarea>
+					
+				</div>
+
+		
+					<div class="column" style="background-color:#aaa;">
+						<br><b><u>Result Tables</u></b>
+						<br><br> All <input type="checkbox">
+						<br><br><input type="file" id="myFile" name="filename">
+						<div id="req">
+						</div>
+						<br><br><button onclick="myFunction(this.id)" id="request"><b>+</b></button> Add Result Table
+						<br><br><br><br><br><br><br><br><button>Calculate Request</button>
+					</div>
+				</div>
+
+				<input type="radio" id="tabregisterdata" name="mytabs">
+				<label for="tabregisterdata" style ="border-right: 0px;">Register Data</label>
+				<div class="tab">
+					<div class="column" style="background-color:#aaa; width:280px;">
+
+						<br><b><u>Register Algorithm</u></b>
+						<br><br><br> Choose algorithm excutable:
+						<br><br><input type="file" id="myFile" name="filename">
+						<br><br><br><br><br><br> Choose algorithm excutable:
+						<br><br><input type="file" id="myFile" name="filename">
+						<br><br><br><br><br><br><br><button>Upload algorithm files</button>
+
+					</div>
+					<div class="column" style="background-color:#aaa;">
+
+						<br><b><u>Register Benchmark</u></b>
+						<br><br><br> Choose Benchmark archive:
+						<br><br><input type="file" id="myFile" name="filename">
+						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><button>Upload Benchmark</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="tab">
+			<div class="column" style="background-color:#bbb; padding-top: 65px;">
+				<h3><u> Result tables</u></h3>
+				Table 1 :
+				<input type="file" id="fileUpload" accept=".csv" />
+				<input type="button" id="upload" value="Upload" onclick="Upload()"  />
+				<div id="t">
+				</div>
+				<br><button onclick="myFunction(this.id)" id="tables"><b>+</b></button>
+				<h3><u> Criteria</u></h3>
+
+				<input type="file" id="myFile" name="filename">
+				<div id="cr">
+				</div>
+				<br><button onclick="myFunction(this.id)" id="criteria"><b>+</b></button>
+				<h3><u> Show recommendation table</u><input type="checkbox"></h3>
+
+				<input type="file" id="myFile" name="filename">
+			</div>
+
+			<div class="column" style="background-color:#ccc; border-left:0px; padding-left:0px; max-width:400px;">
+				<div class="mytabs" , id="tabs">
+					<input type="radio" id="tabtableview" name="viewtabs" checked="checked">
+					<label for="tabtableview">Table 1 view</label>
+					<div class="tab">
+						<div id="dvCSV">
+						</div>
+					</div>
+					<input type="radio" id="tabdiagramview" name="viewtabs">
+					<label for="tabdiagramview">Diagram view</label>
+					<div class="tab">
+					</div>
+				</div>
+			</div>
+		
+		</div>
+	</body>
+</html>
